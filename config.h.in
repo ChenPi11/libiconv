@@ -1,50 +1,5 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
-/* Define to the number of bits in type 'int16_t'. */
-#undef BITSIZEOF_INT16_T
-
-/* Define to the number of bits in type 'int32_t'. */
-#undef BITSIZEOF_INT32_T
-
-/* Define to the number of bits in type 'int64_t'. */
-#undef BITSIZEOF_INT64_T
-
-/* Define to the number of bits in type 'int8_t'. */
-#undef BITSIZEOF_INT8_T
-
-/* Define to the number of bits in type 'intmax_t'. */
-#undef BITSIZEOF_INTMAX_T
-
-/* Define to the number of bits in type 'intptr_t'. */
-#undef BITSIZEOF_INTPTR_T
-
-/* Define to the number of bits in type 'int_fast16_t'. */
-#undef BITSIZEOF_INT_FAST16_T
-
-/* Define to the number of bits in type 'int_fast32_t'. */
-#undef BITSIZEOF_INT_FAST32_T
-
-/* Define to the number of bits in type 'int_fast64_t'. */
-#undef BITSIZEOF_INT_FAST64_T
-
-/* Define to the number of bits in type 'int_fast8_t'. */
-#undef BITSIZEOF_INT_FAST8_T
-
-/* Define to the number of bits in type 'int_least16_t'. */
-#undef BITSIZEOF_INT_LEAST16_T
-
-/* Define to the number of bits in type 'int_least32_t'. */
-#undef BITSIZEOF_INT_LEAST32_T
-
-/* Define to the number of bits in type 'int_least64_t'. */
-#undef BITSIZEOF_INT_LEAST64_T
-
-/* Define to the number of bits in type 'int_least8_t'. */
-#undef BITSIZEOF_INT_LEAST8_T
-
-/* Define to the number of bits in type 'long'. */
-#undef BITSIZEOF_LONG
-
 /* Define to the number of bits in type 'ptrdiff_t'. */
 #undef BITSIZEOF_PTRDIFF_T
 
@@ -53,54 +8,6 @@
 
 /* Define to the number of bits in type 'size_t'. */
 #undef BITSIZEOF_SIZE_T
-
-/* Define to the number of bits in type 'uint16_t'. */
-#undef BITSIZEOF_UINT16_T
-
-/* Define to the number of bits in type 'uint32_t'. */
-#undef BITSIZEOF_UINT32_T
-
-/* Define to the number of bits in type 'uint64_t'. */
-#undef BITSIZEOF_UINT64_T
-
-/* Define to the number of bits in type 'uint8_t'. */
-#undef BITSIZEOF_UINT8_T
-
-/* Define to the number of bits in type 'uintmax_t'. */
-#undef BITSIZEOF_UINTMAX_T
-
-/* Define to the number of bits in type 'uintptr_t'. */
-#undef BITSIZEOF_UINTPTR_T
-
-/* Define to the number of bits in type 'uint_fast16_t'. */
-#undef BITSIZEOF_UINT_FAST16_T
-
-/* Define to the number of bits in type 'uint_fast32_t'. */
-#undef BITSIZEOF_UINT_FAST32_T
-
-/* Define to the number of bits in type 'uint_fast64_t'. */
-#undef BITSIZEOF_UINT_FAST64_T
-
-/* Define to the number of bits in type 'uint_fast8_t'. */
-#undef BITSIZEOF_UINT_FAST8_T
-
-/* Define to the number of bits in type 'uint_least16_t'. */
-#undef BITSIZEOF_UINT_LEAST16_T
-
-/* Define to the number of bits in type 'uint_least32_t'. */
-#undef BITSIZEOF_UINT_LEAST32_T
-
-/* Define to the number of bits in type 'uint_least64_t'. */
-#undef BITSIZEOF_UINT_LEAST64_T
-
-/* Define to the number of bits in type 'uint_least8_t'. */
-#undef BITSIZEOF_UINT_LEAST8_T
-
-/* Define to the number of bits in type 'unsigned_int'. */
-#undef BITSIZEOF_UNSIGNED_INT
-
-/* Define to the number of bits in type 'unsigned_long'. */
-#undef BITSIZEOF_UNSIGNED_LONG
 
 /* Define to the number of bits in type 'wchar_t'. */
 #undef BITSIZEOF_WCHAR_T
@@ -129,12 +36,6 @@
 /* Define to 1 if the package shall run at any location in the filesystem. */
 #undef ENABLE_RELOCATABLE
 
-/* Define this to the full path to <inttypes.h>. */
-#undef FULL_PATH_INTTYPES_H
-
-/* Define this to the full path to <stdint.h>. */
-#undef FULL_PATH_STDINT_H
-
 /* Define to 1 if you have `alloca', as a function or macro. */
 #undef HAVE_ALLOCA
 
@@ -156,6 +57,10 @@
 /* Define if the GNU dcgettext() function is already present or preinstalled.
    */
 #undef HAVE_DCGETTEXT
+
+/* Define to 1 if you have the declaration of `canonicalize_file_name', and to
+   0 if you don't. */
+#undef HAVE_DECL_CANONICALIZE_FILE_NAME
 
 /* Define to 1 if you have the declaration of `clearerr_unlocked', and to 0 if
    you don't. */
@@ -209,6 +114,10 @@
    don't. */
 #undef HAVE_DECL_PUTC_UNLOCKED
 
+/* Define to 1 if you have the declaration of `strerror', and to 0 if you
+   don't. */
+#undef HAVE_DECL_STRERROR
+
 /* Define to 1 if you have the declaration of `strerror_r', and to 0 if you
    don't. */
 #undef HAVE_DECL_STRERROR_R
@@ -219,9 +128,6 @@
 /* Define if you have the declaration of environ. */
 #undef HAVE_ENVIRON_DECL
 
-/* Define if you have the declaration of errno. */
-#undef HAVE_ERRNO_DECL
-
 /* Define to 1 if you have the `getcwd' function. */
 #undef HAVE_GETCWD
 
@@ -231,77 +137,26 @@
 /* Define if the GNU gettext() function is already present or preinstalled. */
 #undef HAVE_GETTEXT
 
-/* Define if you have the iconv() function. */
+/* Define if you have the iconv() function and it works. */
 #undef HAVE_ICONV
 
-/* Define to 1 if the type 'int16_t' is already defined. */
-#undef HAVE_INT16_T
-
-/* Define to 1 if the type 'int32_t' is already defined. */
-#undef HAVE_INT32_T
-
-/* Define to 1 if the type 'int64_t' is already defined. */
-#undef HAVE_INT64_T
-
-/* Define to 1 if the type 'int64_t' is already definedin <stdint.h>. */
-#undef HAVE_INT64_T_IN_STDINT_H
-
-/* Define to 1 if the type 'int8_t' is already defined. */
-#undef HAVE_INT8_T
-
-/* Define to 1 if the type 'intmax_t' is already defined. */
-#undef HAVE_INTMAX_T
-
-/* Define to 1 if the type 'intptr_t' is already defined. */
-#undef HAVE_INTPTR_T
+/* Define if your compiler supports the #include_next directive. */
+#undef HAVE_INCLUDE_NEXT
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
-/* Define to 1 if the type 'int_fast16_t' is already defined. */
-#undef HAVE_INT_FAST16_T
-
-/* Define to 1 if the type 'int_fast32_t' is already defined. */
-#undef HAVE_INT_FAST32_T
-
-/* Define to 1 if the type 'int_fast64_t' is already defined. */
-#undef HAVE_INT_FAST64_T
-
-/* Define to 1 if the type 'int_fast64_t' is already definedin <stdint.h>. */
-#undef HAVE_INT_FAST64_T_IN_STDINT_H
-
-/* Define to 1 if the type 'int_fast8_t' is already defined. */
-#undef HAVE_INT_FAST8_T
-
-/* Define to 1 if the type 'int_least16_t' is already defined. */
-#undef HAVE_INT_LEAST16_T
-
-/* Define to 1 if the type 'int_least32_t' is already defined. */
-#undef HAVE_INT_LEAST32_T
-
-/* Define to 1 if the type 'int_least64_t' is already defined. */
-#undef HAVE_INT_LEAST64_T
-
-/* Define to 1 if the type 'int_least64_t' is already definedin <stdint.h>. */
-#undef HAVE_INT_LEAST64_T_IN_STDINT_H
-
-/* Define to 1 if the type 'int_least8_t' is already defined. */
-#undef HAVE_INT_LEAST8_T
-
 /* Define if you have <langinfo.h> and nl_langinfo(CODESET). */
 #undef HAVE_LANGINFO_CODESET
 
-/* Define to 1 if you have the <locale.h> header file. */
-#undef HAVE_LOCALE_H
-
-/* Define if you have the 'long double' type. */
-#undef HAVE_LONG_DOUBLE
-
-/* Define if you have the 'long long' type. */
-#undef HAVE_LONG_LONG
+/* Define to 1 if the system has the type `long long int'. */
+#undef HAVE_LONG_LONG_INT
 
 /* Define to 1 if you have the <mach-o/dyld.h> header file. */
 #undef HAVE_MACH_O_DYLD_H
+
+/* Define if the 'malloc' function is POSIX compliant. */
+#undef HAVE_MALLOC_POSIX
 
 /* Define to 1 if you have the `mbrtowc' function. */
 #undef HAVE_MBRTOWC
@@ -317,9 +172,6 @@
 
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
-
-/* Define to 1 if the system has the type `ptrdiff_t'. */
-#undef HAVE_PTRDIFF_T
 
 /* Define to 1 if you have the `readlink' function. */
 #undef HAVE_READLINK
@@ -342,23 +194,14 @@
 /* Define to 1 if 'wint_t' is a signed integer type. */
 #undef HAVE_SIGNED_WINT_T
 
-/* Define to 1 if the system has the type `sig_atomic_t'. */
-#undef HAVE_SIG_ATOMIC_T
-
 /* Define to 1 if stdbool.h conforms to C99. */
 #undef HAVE_STDBOOL_H
-
-/* Define to 1 if you have the <stddef.h> header file. */
-#undef HAVE_STDDEF_H
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #undef HAVE_STDINT_H
 
 /* Define to 1 if you have the <stdlib.h> header file. */
 #undef HAVE_STDLIB_H
-
-/* Define to 1 if you have the `strerror' function. */
-#undef HAVE_STRERROR
 
 /* Define to 1 if you have the `strerror_r' function. */
 #undef HAVE_STRERROR_R
@@ -387,63 +230,11 @@
 /* Define to 1 if you have the `tsearch' function. */
 #undef HAVE_TSEARCH
 
-/* Define to 1 if the type 'uint16_t' is already defined. */
-#undef HAVE_UINT16_T
-
-/* Define to 1 if the type 'uint32_t' is already defined. */
-#undef HAVE_UINT32_T
-
-/* Define to 1 if the type 'uint64_t' is already defined. */
-#undef HAVE_UINT64_T
-
-/* Define to 1 if the type 'uint64_t' is already definedin <stdint.h>. */
-#undef HAVE_UINT64_T_IN_STDINT_H
-
-/* Define to 1 if the type 'uint8_t' is already defined. */
-#undef HAVE_UINT8_T
-
-/* Define to 1 if the type 'uintmax_t' is already defined. */
-#undef HAVE_UINTMAX_T
-
-/* Define to 1 if the type 'uintptr_t' is already defined. */
-#undef HAVE_UINTPTR_T
-
-/* Define to 1 if the type 'uint_fast16_t' is already defined. */
-#undef HAVE_UINT_FAST16_T
-
-/* Define to 1 if the type 'uint_fast32_t' is already defined. */
-#undef HAVE_UINT_FAST32_T
-
-/* Define to 1 if the type 'uint_fast64_t' is already defined. */
-#undef HAVE_UINT_FAST64_T
-
-/* Define to 1 if the type 'uint_fast64_t' is already definedin <stdint.h>. */
-#undef HAVE_UINT_FAST64_T_IN_STDINT_H
-
-/* Define to 1 if the type 'uint_fast8_t' is already defined. */
-#undef HAVE_UINT_FAST8_T
-
-/* Define to 1 if the type 'uint_least16_t' is already defined. */
-#undef HAVE_UINT_LEAST16_T
-
-/* Define to 1 if the type 'uint_least32_t' is already defined. */
-#undef HAVE_UINT_LEAST32_T
-
-/* Define to 1 if the type 'uint_least64_t' is already defined. */
-#undef HAVE_UINT_LEAST64_T
-
-/* Define to 1 if the type 'uint_least64_t' is already definedin <stdint.h>.
-   */
-#undef HAVE_UINT_LEAST64_T_IN_STDINT_H
-
-/* Define to 1 if the type 'uint_least8_t' is already defined. */
-#undef HAVE_UINT_LEAST8_T
-
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
-/* Define to 1 if you have the `unsetenv' function. */
-#undef HAVE_UNSETENV
+/* Define to 1 if the system has the type `unsigned long long int'. */
+#undef HAVE_UNSIGNED_LONG_LONG_INT
 
 /* Define to 1 or 0, depending whether the compiler supports simple visibility
    declarations. */
@@ -458,9 +249,6 @@
 /* Define to 1 if you have the `wcrtomb' function. */
 #undef HAVE_WCRTOMB
 
-/* Define to 1 if the system has the type `wint_t'. */
-#undef HAVE_WINT_T
-
 /* Define to 1 if the system has the type `_Bool'. */
 #undef HAVE__BOOL
 
@@ -473,92 +261,11 @@
 /* Define to the value of ${prefix}, as a string. */
 #undef INSTALLPREFIX
 
-/* Define if <stdint.h> doesn't define it. */
-#undef INT16_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INT16_MIN
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INT32_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INT32_MIN
-
-/* Define if <stdint.h> doesn't define it but has the int64_t type. */
-#undef INT64_MAX
-
-/* Define if <stdint.h> doesn't define it but has the int64_t type. */
-#undef INT64_MIN
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INT8_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INT8_MIN
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INTMAX_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INTMAX_MIN
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INTPTR_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INTPTR_MIN
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INT_FAST16_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INT_FAST16_MIN
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INT_FAST32_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INT_FAST32_MIN
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INT_FAST64_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INT_FAST64_MIN
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INT_FAST8_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INT_FAST8_MIN
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INT_LEAST16_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INT_LEAST16_MIN
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INT_LEAST32_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INT_LEAST32_MIN
-
-/* Define if <stdint.h> doesn't define it but has the int_least64_t type. */
-#undef INT_LEAST64_MAX
-
-/* Define if <stdint.h> doesn't define it but has the int_least64_t type. */
-#undef INT_LEAST64_MIN
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INT_LEAST8_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef INT_LEAST8_MIN
-
 /* If malloc(0) is != NULL, define this to 1. Otherwise define this to 0. */
 #undef MALLOC_0_IS_NONNULL
+
+/* Define to 1 if your C compiler doesn't accept -c and -o together. */
+#undef NO_MINUS_C_MINUS_O
 
 /* Name of package */
 #undef PACKAGE
@@ -578,21 +285,20 @@
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
 
-/* Define if <stdint.h> doesn't define it. */
-#undef PTRDIFF_MAX
+/* Define to l, ll, u, ul, ull, etc., as suitable for constants of type
+   'ptrdiff_t'. */
+#undef PTRDIFF_T_SUFFIX
 
-/* Define if <stdint.h> doesn't define it. */
-#undef PTRDIFF_MIN
+/* Define this to 1 if strerror is broken. */
+#undef REPLACE_STRERROR
 
-/* Define if <stdint.h> doesn't define it. */
-#undef SIG_ATOMIC_MAX
+/* Define to l, ll, u, ul, ull, etc., as suitable for constants of type
+   'sig_atomic_t'. */
+#undef SIG_ATOMIC_T_SUFFIX
 
-/* Define if <stdint.h> doesn't define it. */
-#undef SIG_ATOMIC_MIN
-
-/* Define as the maximum value of type 'size_t', if the system doesn't define
-   it. */
-#undef SIZE_MAX
+/* Define to l, ll, u, ul, ull, etc., as suitable for constants of type
+   'size_t'. */
+#undef SIZE_T_SUFFIX
 
 /* If using the C implementation of alloca, define if you know the
    direction of stack growth for your system; otherwise it will be
@@ -608,48 +314,6 @@
 /* Define to 1 if strerror_r returns char *. */
 #undef STRERROR_R_CHAR_P
 
-/* Define if <stdint.h> doesn't define it. */
-#undef UINT16_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef UINT32_MAX
-
-/* Define if <stdint.h> doesn't define it but has the uint64_t type. */
-#undef UINT64_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef UINT8_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef UINTMAX_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef UINTPTR_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef UINT_FAST16_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef UINT_FAST32_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef UINT_FAST64_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef UINT_FAST8_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef UINT_LEAST16_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef UINT_LEAST32_MAX
-
-/* Define if <stdint.h> doesn't define it but has the uint_least64_t type. */
-#undef UINT_LEAST64_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef UINT_LEAST8_MAX
-
 /* Define to 1 if you want getc etc. to use unlocked I/O if available.
    Unlocked I/O can improve performance in unithreaded apps, but it is not
    safe for multithreaded apps. */
@@ -658,24 +322,16 @@
 /* Version number of package */
 #undef VERSION
 
-/* Define if unsetenv() returns void, not int. */
-#undef VOID_UNSETENV
+/* Define to l, ll, u, ul, ull, etc., as suitable for constants of type
+   'wchar_t'. */
+#undef WCHAR_T_SUFFIX
 
-/* Define if <stdint.h> doesn't define it. */
-#undef WINT_MAX
-
-/* Define if <stdint.h> doesn't define it. */
-#undef WINT_MIN
+/* Define to l, ll, u, ul, ull, etc., as suitable for constants of type
+   'wint_t'. */
+#undef WINT_T_SUFFIX
 
 /* Define if the machine's byte ordering is little endian. */
 #undef WORDS_LITTLEENDIAN
-
-/* Define to 1 if on AIX 3.
-   System headers sometimes define this.
-   We just want to avoid a redefinition error message.  */
-#ifndef _ALL_SOURCE
-# undef _ALL_SOURCE
-#endif
 
 /* Enable GNU extensions on systems that have them.  */
 #ifndef _GNU_SOURCE
@@ -692,10 +348,27 @@
 /* Define to 1 if you need to in order for `stat' and other things to work. */
 #undef _POSIX_SOURCE
 
-/* Enable extensions on Solaris.  */
+/* Enable extensions on AIX 3, Interix.  */
+#ifndef _ALL_SOURCE
+# undef _ALL_SOURCE
+#endif
+/* Enable GNU extensions on systems that have them.  */
+#ifndef _GNU_SOURCE
+# undef _GNU_SOURCE
+#endif
+/* Enable threading extensions on Solaris.  */
+#ifndef _POSIX_PTHREAD_SEMANTICS
+# undef _POSIX_PTHREAD_SEMANTICS
+#endif
+/* Enable extensions on HP NonStop.  */
+#ifndef _TANDEM_SOURCE
+# undef _TANDEM_SOURCE
+#endif
+/* Enable general extensions on Solaris.  */
 #ifndef __EXTENSIONS__
 # undef __EXTENSIONS__
 #endif
+
 
 /* Define to a type if <wchar.h> does not define. */
 #undef mbstate_t
@@ -703,8 +376,18 @@
 /* Define to a replacement function name for realpath(). */
 #undef realpath
 
-/* Define to `unsigned int' if <sys/types.h> does not define. */
-#undef size_t
+/* Define to the equivalent of the C99 'restrict' keyword, or to
+   nothing if this is not supported.  Do not define if restrict is
+   supported directly.  */
+#undef restrict
+/* Work around a bug in Sun C++: it does not support _Restrict, even
+   though the corresponding Sun C compiler does, which causes
+   "#define restrict _Restrict" in the previous line.  Perhaps some future
+   version of Sun C++ will work with _Restrict; if so, it'll probably
+   define __RESTRICT, just as Sun C does.  */
+#if defined __SUNPRO_CC && !defined __RESTRICT
+# define _Restrict
+#endif
 
 /* Define as a signed type of the same size as size_t. */
 #undef ssize_t

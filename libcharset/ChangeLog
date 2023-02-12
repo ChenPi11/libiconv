@@ -1,3 +1,65 @@
+2007-11-11  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.devel (AUTOCONF, AUTOHEADER): Require version 2.61.
+	(ACLOCAL): Require version 1.10.
+
+2007-10-26  Bruno Haible  <bruno@clisp.org>
+
+	* m4/libtool.m4: Update, based on libtool-1.5.24.
+	* build-aux/ltmain.sh: Update, based on libtool-1.5.24.
+
+2007-06-30  Bruno Haible  <bruno@clisp.org>
+
+	* autogen.sh: New file.
+	* DEPENDENCIES: New file.
+	* HACKING: New file.
+
+2007-03-04  Bruno Haible  <bruno@clisp.org>
+
+	* configure.ac: Invoke gl_RELOCATABLE_LIBRARY instead of
+	AC_RELOCATABLE_LIBRARY.
+	* m4/relocatable-lib.m4: New file, from gnulib.
+	* m4/relocatable.m4: Remove file.
+
+2007-02-16  Juan Manuel Guerrero  <juan.guerrero@gmx.de>
+
+	* djgpp/*: Update.
+
+2006-10-31  Bruno Haible  <bruno@clisp.org>
+
+	Update from GNU gettext.
+	2006-10-25  Bruno Haible  <bruno@clisp.org>
+		* m4/relocatable.m4 (AC_RELOCATABLE_BODY): Renamed from
+		AC_RELOCATABLE, without the AC_LIBOBJ invocation.
+		(AC_RELOCATABLE): New macro. Invoke AC_LIBOBJ here.
+
+2006-10-18  Bruno Haible  <bruno@clisp.org>
+
+	* INTEGRATE: Remove recommendation to test for setlocale.
+
+2006-07-29  Bruno Haible  <bruno@clisp.org>
+
+	* configure.ac: Assume <stddef.h>, <stdlib.h>, <string.h> exist.
+
+2006-07-29  Bruno Haible  <bruno@clisp.org>
+
+	* configure.ac: Remove obsolete calls AC_PROG_GCC_TRADITIONAL,
+	AC_ISC_POSIX.
+
+2006-07-25  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.msvc: Remove file.
+	* Makefile.devel (config.h.msvc): Remove rule.
+	(include/libcharset.h.msvc-shared, include/localcharset.h.msvc-shared):
+	Remove rules.
+	(all): Update.
+
+2006-07-25  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.vms: Remove file.
+	* Makefile.devel (config.h_vms): Remove rule.
+	(all): Update.
+
 2006-06-27  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.devel (AUTOCONF, AUTOHEADER): Use autoconf-2.60.
@@ -26,7 +88,7 @@
 	* m4/libtool.m4: On Cygwin, like on mingw, define DLL_EXPORT when
 	compiling a shared library object.
 
-2006-03-31  Juan Manuel Guerrero <juan.guerrero@gmx.de>
+2006-03-31  Juan Manuel Guerrero  <juan.guerrero@gmx.de>
 
 	* djgpp/*: Update.
 

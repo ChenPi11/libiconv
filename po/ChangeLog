@@ -1,3 +1,44 @@
+2007-11-11  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.in.in: Upgrade to gettext-0.17.
+	* Rules-quot: Upgrade to gettext-0.17.
+
+2007-10-24  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.in.in: Update from gettext-0.16.2.
+
+2007-10-24  Bruno Haible  <bruno@clisp.org>
+
+	* fi.po: Update from Jorma Karvonen <karvjorm@users.sf.net>.
+
+2007-10-15  Bruno Haible  <bruno@clisp.org>
+
+	* sl.po: Update from
+	Primož Peterlin <primoz.peterlin@biofiz.mf.uni-lj.si>.
+
+2007-09-15  Bruno Haible  <bruno@clisp.org>
+
+	* eo.po: Update from Edmund Grimley Evans <edmundo@rano.org>.
+	* ga.po: Update from Kevin Scannell <kscanne@gmail.com>.
+	* nl.po: Update from Tim Van Holder <tim.van.holder@telenet.be>.
+	* sv.po: Update from Daniel Nylander <po@danielnylander.se>.
+	* vi.po: Update from Clytie Siddall <clytie@riverland.net.au>.
+	* wa.po: Update from Pablo Saratxaga <pablo@walon.org>.
+
+2007-05-30  Bruno Haible  <bruno@clisp.org>
+
+	* sv.po: Update from Daniel Nylander <po@danielnylander.se>.
+
+2006-10-02  Bruno Haible  <bruno@clisp.org>
+
+	* sl.po: Update from
+	Primož Peterlin <primoz.peterlin@biofiz.mf.uni-lj.si>.
+
+2006-09-28  Bruno Haible  <bruno@clisp.org>
+
+	* et.po: Update from Toomas Soome <Toomas.Soome@microlink.ee>.
+	* sr.po: Update from Aleksandar Jelenak <jelenak@verizon.net>.
+
 2006-07-19  Bruno Haible  <bruno@clisp.org>
 
 	* de.po: Update.

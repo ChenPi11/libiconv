@@ -1,4 +1,4 @@
-dnl Copyright (C) 1999-2006 Free Software Foundation, Inc.
+dnl Copyright (C) 1999-2007 Free Software Foundation, Inc.
 dnl This file is part of the GNU LIBICONV Library.
 dnl
 dnl The GNU LIBICONV Library is free software; you can redistribute it
@@ -16,11 +16,11 @@ dnl License along with the GNU LIBICONV Library; see the file COPYING.LIB.
 dnl If not, write to the Free Software Foundation, Inc., 51 Franklin Street,
 dnl Fifth Floor, Boston, MA 02110-1301, USA.
 
-AC_PREREQ(2.52)
+AC_PREREQ([2.60])
 AC_INIT
 AC_CONFIG_SRCDIR(lib/iconv.c)
 AC_CONFIG_AUX_DIR(build-aux)
-AM_INIT_AUTOMAKE(libiconv, 1.11)
+AM_INIT_AUTOMAKE(libiconv, 1.12)
 AC_CONFIG_HEADERS(config.h lib/config.h)
 AC_PROG_MAKE_SET
 
@@ -28,7 +28,6 @@ dnl           checks for basic programs
 
 AC_PROG_CC
 AC_PROG_CPP
-AC_PROG_GCC_TRADITIONAL
 AC_PROG_INSTALL
 
 dnl           check for host type
@@ -46,13 +45,11 @@ m4_pushdef([AC_REPLACE_FUNCS], m4_defn([my_SRCLIB_REPLACE_FUNCS]))
 
 dnl           checks for UNIX variants that set DEFS
 
-AC_GNU_SOURCE
-gl_USE_SYSTEM_EXTENSIONS
-AC_ISC_POSIX
+gl_EARLY
 
 dnl           checks for installer options
 
-AC_RELOCATABLE
+gl_RELOCATABLE([srclib])
 
 AC_ARG_ENABLE([extra-encodings],
   [AC_HELP_STRING([--enable-extra-encodings],
@@ -65,7 +62,6 @@ AC_SUBST([USE_EXTRA_ENCODINGS])
 
 dnl           checks for programs
 
-AC_PROG_RANLIB
 CL_PROG_CP
 CL_PROG_LN
 AC_PROG_LN_S
@@ -84,24 +80,17 @@ gl_VISIBILITY
 AM_ICONV
 AM_GNU_GETTEXT([external], [need-ngettext])
 
-dnl           checks for header files
-
-AC_HEADER_STDC
-AC_CHECK_HEADERS([locale.h stddef.h stdlib.h string.h])
-gl_HEADER_UNISTD
-
 dnl           checks for typedefs
 
 AC_TYPE_MBSTATE_T
-gl_STDINT_H
 gt_TYPE_WCHAR_T
 
-dnl           checks for functions and declarations
+dnl           checks for header files, functions and declarations
 
-if test "$am_cv_func_iconv" = yes -a -z "$am_cv_proto_iconv_arg1"; then
-  ICONV_CONST=""
-else
+if test "$am_cv_func_iconv" = yes -a -n "$am_cv_proto_iconv_arg1"; then
   ICONV_CONST="const"
+else
+  ICONV_CONST=""
 fi
 AC_SUBST(ICONV_CONST)
 
@@ -121,17 +110,7 @@ AC_EILSEQ
 
 CL_WORDS_LITTLEENDIAN
 
-gl_FUNC_ALLOCA
-gl_ALLOCSA
-gl_CANONICALIZE
-gl_FUNC_GLIBC_UNLOCKED_IO
-gl_ERROR
-gl_PATHMAX
-gt_FUNC_SETENV
-AM_STDBOOL_H
-gl_FUNC_STRERROR
-gl_FUNC_READLINK
-gl_XREADLINK
+gl_INIT
 
 dnl           hack
 
@@ -180,6 +159,19 @@ else
   DLL_VARIABLE=
 fi
 AC_SUBST([DLL_VARIABLE])
+
+dnl On mingw and Cygwin, we can activate special Makefile rules which add
+dnl version information to the shared libraries and executables.
+case "$host_os" in
+  mingw* | cygwin*) is_woe32=yes ;;
+  *) is_woe32=no ;;
+esac
+WOE32=$is_woe32
+AC_SUBST([WOE32])
+if test $WOE32 = yes; then
+  dnl Check for a program that compiles Windows resource files.
+  AC_CHECK_TOOL([WINDRES], [windres])
+fi
 
 AH_BOTTOM([
 /* On Windows, variables that may be in a DLL must be marked specially.  */

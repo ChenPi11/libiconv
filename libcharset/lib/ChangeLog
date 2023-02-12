@@ -1,3 +1,39 @@
+2006-10-31  Bruno Haible  <bruno@clisp.org>
+
+	Update from GNU gettext.
+	2006-09-14  Bruno Haible  <bruno@clisp.org>
+		* lib/relocatable.c: Likewise.
+
+2006-10-17  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* localcharset.c: Do not check HAVE_SETLOCALE.
+
+2006-09-14  Bruno Haible  <bruno@clisp.org>
+
+	* localcharset.c: Include <config.h> unconditionally.
+
+2006-08-29  Bruno Haible  <bruno@clisp.org>
+
+	* localcharset.c: Include configmake.h in order to get LIBDIR defined.
+
+2006-07-29  Bruno Haible  <bruno@clisp.org>
+
+	* localcharset.c: Assume <stddef.h>, <stdlib.h>, <string.h> exist.
+
+2006-07-25  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.msvc: Remove file.
+
+2006-07-25  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.vms: Remove file.
+
+2006-07-23  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.in (libcharset.la): Use the CFLAGS during linking.
+	Needed because the CFLAGS can e.g. trigger profiling.
+	Reported by Russell Aspinwall <russell.aspinwall@flomerics.co.uk>.
+
 2006-07-14  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.in (clean): Remove also *.stackdump.

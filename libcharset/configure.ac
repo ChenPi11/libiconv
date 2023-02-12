@@ -1,4 +1,4 @@
-dnl Copyright (C) 2000-2003, 2005-2006 Free Software Foundation, Inc.
+dnl Copyright (C) 2000-2003, 2005-2007 Free Software Foundation, Inc.
 dnl This file is part of the GNU CHARSET Library.
 dnl
 dnl The GNU CHARSET Library is free software; you can redistribute it and/or
@@ -32,7 +32,6 @@ dnl           checks for basic programs
 
 AC_PROG_CC
 AC_PROG_CPP
-AC_PROG_GCC_TRADITIONAL
 AC_PROG_INSTALL
 
 dnl           check for host type
@@ -41,7 +40,7 @@ AC_CANONICAL_HOST
 
 dnl           checks for installer options
 
-AC_RELOCATABLE_LIBRARY
+gl_RELOCATABLE_LIBRARY
 
 dnl           checks for programs
 
@@ -49,7 +48,6 @@ dnl           checks for UNIX variants that set DEFS
 
 AC_AIX
 AC_MINIX
-AC_ISC_POSIX
 
 dnl           checks for compiler output filename suffixes
 
@@ -66,7 +64,6 @@ dnl           checks for header files and functions
 
 AM_LANGINFO_CODESET
 gl_GLIBC21
-AC_CHECK_HEADERS(stddef.h stdlib.h string.h)
 AC_CHECK_FUNCS(setlocale)
 
 AC_CONFIG_FILES([Makefile])

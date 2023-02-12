@@ -82,6 +82,7 @@
 #define ei_georgian_ps_oflags (HAVE_ACCENTS | HAVE_QUOTATION_MARKS)
 #define ei_koi8_t_oflags (HAVE_QUOTATION_MARKS)
 #define ei_pt154_oflags (HAVE_QUOTATION_MARKS)
+#define ei_rk1048_oflags (HAVE_QUOTATION_MARKS)
 #define ei_mulelao_oflags (0)
 #define ei_cp1133_oflags (0)
 #define ei_tis620_oflags (0)

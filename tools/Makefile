@@ -54,6 +54,7 @@ ALL = \
  georgian_ps.h \
  koi8_t.h \
  pt154.h \
+ rk1048.h \
  mulelao.h \
  cp1133.h \
  tis620.h \
@@ -273,6 +274,9 @@ koi8_t.h : $(TABLESDIR)/glibc-2.2.90-iconv/KOI8-T.TXT
 pt154.h : $(TABLESDIR)/IANA/PTCP154.TXT
 	./8bit_tab_to_h PT154 pt154 < $<
 
+rk1048.h : $(TABLESDIR)/IANA/KZ-1048.TXT
+	(echo '#' ; cat $<) | ./8bit_tab_to_h RK1048 rk1048
+
 mulelao.h : $(TABLESDIR)/csets-new/MULELAO1.TXT 8bit_tab_to_h
 	./8bit_tab_to_h MULELAO-1 mulelao < $<
 
@@ -403,10 +407,11 @@ hkscs2004.h : $(TABLESDIR)/big5hkscs/HKSCS-2004_2006-DELTA.TXT cjk_tab_to_h
 # We use a modified KSC 5601 = KSX 1001 table. Jungshik Shin <jshin@mailaps.org>
 # reports that Prof. GIM Geongseog (KIM Keyongseok) <gimgs@asadal.cs.pusan.ac.kr>
 # (who represents South Korea in ISO/IEC JTC1 SC2/WG2 and SC22/WG20) says that
-# these two characters were added to KSX 1001 in December 1998, and one more
-# (Korean zip code sign) is likely to follow in 2002.
+# these two characters were added to KSX 1001 in December 1998. According to
+# http://std.dkuug.dk/jtc1/sc2/wg2/docs/N2815.doc, one more character
+# (Korean postal code sign) was added in 2002.
 ksc5601.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/KSC/KSC5601.TXT cjk_tab_to_h
-	(cat $< ; echo '0xA2E6	0x20AC'; echo '0xA2E7	0x00AE') | ./cjk_tab_to_h KSC5601.1987-0 ksc5601 > $@
+	(cat $< ; echo '0xA2E6	0x20AC'; echo '0xA2E7	0x00AE'; echo '0xA2E8	0x327E') | ./cjk_tab_to_h 'KSC5601.1987-0, now KS X 1001:2002' ksc5601 > $@
 
 uhc_1.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/KSC/KSC5601.TXT cjk_tab_to_h
 	(echo '#' ; grep '^0x\([8-9]\|A0\)' < $< ) | ./cjk_tab_to_h 'Unified Hangul Code part 1' uhc_1 > $@
