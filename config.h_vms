@@ -102,7 +102,7 @@
 #undef HAVE_DOPRNT
 
 /* Define if you have the declaration of environ. */
-#define HAVE_ENVIRON_DECL 1
+#undef HAVE_ENVIRON_DECL
 
 /* Define if you have the declaration of errno. */
 #define HAVE_ERRNO_DECL 1
@@ -128,9 +128,6 @@
 /* Define if you have <langinfo.h> and nl_langinfo(CODESET). */
 #define HAVE_LANGINFO_CODESET 1
 
-/* Define to 1 if you have the <limits.h> header file. */
-#define HAVE_LIMITS_H 1
-
 /* Define to 1 if you have the <locale.h> header file. */
 #define HAVE_LOCALE_H 1
 
@@ -145,6 +142,9 @@
 
 /* Define to 1 if you have the <memory.h> header file. */
 #define HAVE_MEMORY_H 1
+
+/* Define to 1 if you have the `readlink' function. */
+#undef HAVE_READLINK
 
 /* Define to 1 if you have the <search.h> header file. */
 #undef HAVE_SEARCH_H
@@ -276,3 +276,6 @@
 
 /* Define to a replacement function name for realpath(). */
 #define realpath rpl_realpath
+
+/* Define as a signed type of the same size as size_t. */
+#undef ssize_t

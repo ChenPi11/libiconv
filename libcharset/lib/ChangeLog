@@ -1,3 +1,70 @@
+2004-01-21  Bruno Haible  <bruno@clisp.org>
+
+	Upgrade from gettext-0.14.
+
+	2004-01-21  Bruno Haible  <bruno@clisp.org>
+	* config.charset: Add support for MacOS X (Darwin).
+
+	2003-12-02  Bruno Haible  <bruno@clisp.org>
+	* config.charset: Treat the new country name CS like the old country
+	name YU.
+
+	2003-08-20  Bruno Haible  <bruno@clisp.org>
+	* config.charset (linux-gnulibc1*): Change hr_HR, ro_RO to ISO-8859-2.
+	Reported by Alain Guibert <derogaton+bgli@oreka.com>.
+
+	2003-08-14  Bruno Haible  <bruno@clisp.org>
+	* config.charset: Add support for Linux libc5. Based on data from
+	Alain Guibert <derogaton+bgli@oreka.com>.
+
+2003-06-27  Bruno Haible  <bruno@clisp.org>
+
+	Avoid use of *_unlocked functions on Solaris 2.5.1.
+	* localcharset.c: Test HAVE_DECL_GETC_UNLOCKED, not HAVE_GETC_UNLOCKED.
+	Reported by Eric Botcazou <ebotcazou@libertysurf.fr>.
+
+2003-08-20  Bruno Haible  <bruno@clisp.org>
+
+	* config.charset (linux-gnulibc1*): Change hr_HR, ro_RO to ISO-8859-2.
+	Reported by Alain Guibert <derogaton+bgli@oreka.com>.
+
+2003-08-14  Bruno Haible  <bruno@clisp.org>
+
+	* config.charset: Add support for Linux libc5. Based on data from
+	Alain Guibert <derogaton+bgli@oreka.com>.
+
+2003-08-01  Bruno Haible  <bruno@clisp.org>
+
+	* relocatable.c (find_shared_library_fullname): Disable the code on
+	Linux/libc5. Reported by Alain Guibert <derogaton+bgli@oreka.com>.
+
+2003-06-22  Bruno Haible  <bruno@clisp.org>
+
+	Portability to mingw32.
+	* relocatable.c [WIN32]: Include <windows.h>.
+	Reported by Jeff Bonggren <jbon@cfl.rr.com>.
+
+2003-06-22  Bruno Haible  <bruno@clisp.org>
+
+	* relocatable.c (compute_curr_prefix): Comment out this function in
+	the case when it is not used.
+	Reported by Pavel Roskin <proski@gnu.org>.
+
+2003-06-07  Bruno Haible  <bruno@clisp.org>
+
+	Support for relocatable data files even on VMS.
+	* Makefile.vms (bindir): New variable.
+	(DEFS): Add flags for relocatability.
+	Reported by Jouk Jansen <joukj@hrem.stm.tudelft.nl>.
+
+2003-06-07  Bruno Haible  <bruno@clisp.org>
+
+	Support for relocatable data files even on Woe32.
+	* Makefile.msvc (IIPREFIX, IIprefix, IIexec_prefix, IIbindir,
+	IIlibdir): New variables.
+	(PICFLAGS): Also define PIC. Define BUILDING_* flags here.
+	(CFLAGS): ... not here. Add flags for relocatability.
+
 2003-05-18  Bruno Haible  <bruno@clisp.org>
 
 	* Makefile.msvc (DEBUGFLAGS): New variable.

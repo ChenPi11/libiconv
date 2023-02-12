@@ -67,7 +67,12 @@
 # include "pathmax.h"
 # define __alloca alloca
 # if HAVE_GETCWD
-#  define __getcwd getcwd
+#  ifdef VMS
+    /* We want the directory in Unix syntax, not in VMS syntax.  */
+#   define __getcwd(buf, max) getcwd (buf, max, 0)
+#  else
+#   define __getcwd getcwd
+#  endif
 # else
 #  define __getcwd(buf, max) getwd (buf)
 # endif
@@ -274,7 +279,9 @@ error:
     free (rpath);
   return NULL;
 }
+#ifdef _LIBC
 versioned_symbol (libc, __realpath, realpath, GLIBC_2_3);
+#endif
 
 
 #if SHLIB_COMPAT(libc, GLIBC_2_0, GLIBC_2_3)
@@ -299,5 +306,11 @@ __canonicalize_file_name (const char *name)
   return __realpath (name, NULL);
 }
 weak_alias (__canonicalize_file_name, canonicalize_file_name)
+
+#else
+
+/* This declaration is solely to ensure that after preprocessing
+   this file is never empty.  */
+typedef int dummy;
 
 #endif
