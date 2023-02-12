@@ -1,3 +1,63 @@
+2005-07-02  Bruno Haible  <bruno@clisp.org>
+
+	* localcharset.c (get_charset_aliases) [WIN32]: Add CP65001 and others.
+	Reported by <mus1876@gmx.info> via Alain Bench <messtic@oreka.com>.
+
+2005-03-22  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.in (mkinstalldirs): Update.
+
+2005-01-06  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.msvc (CFLAGS): Define also INSTALLPREFIX.
+	* Makefile.vms (DEFS): Likewise.
+	Reported by Troels Walsted Hansen <Troels.W.Hansen@fast.no>.
+
+2004-09-01  Bruno Haible  <bruno@clisp.org>
+
+	* config.charset: Add support for Darwin 7.
+
+2004-04-28  Bruno Haible  <bruno@clisp.org>
+
+	* localcharset.c (ISSLASH): Treat Cygwin like Windows, since it now
+	accepts Windows pathnames.
+
+2004-04-23  Bruno Haible  <bruno@clisp.org>
+
+	* localcharset.c (get_charset_aliases): Allow the CHARSETALIASDIR
+	environment variable to override LIBDIR.
+	Suggested by Matthias Clasen <mclasen@redhat.com>.
+
+2004-04-20  Jim Meyering  <jim@meyering.net>
+            Bruno Haible  <bruno@clisp.org>
+
+	* localcharset.c (get_charset_aliases) [!VMS && !WIN32]: Don't leak
+	memory when realloc fails.
+
+2004-01-20  Bruno Haible  <bruno@clisp.org>
+
+	Upgrade from gettext-0.14.
+
+	2003-10-09  Bruno Haible  <bruno@clisp.org>
+	* relocatable.c: Include xalloc.h instead of xmalloc.h.
+
+	2003-08-24  Bruno Haible  <bruno@clisp.org>
+	* relocatable.h: Make this file includable in C++ mode: add extern "C".
+
+	2003-08-01  Bruno Haible  <bruno@clisp.org>
+	* relocatable.c (find_shared_library_fullname): Disable the code on
+	Linux/libc5. Reported by Alain Guibert <derogaton+bgli@oreka.com>.
+
+	2003-06-27  Bruno Haible  <bruno@clisp.org>
+	Avoid use of *_unlocked functions on Solaris 2.5.1.
+	* localcharset.c: Test HAVE_DECL_GETC_UNLOCKED, not HAVE_GETC_UNLOCKED.
+	Reported by Eric Botcazou <ebotcazou@libertysurf.fr>.
+
+	2003-06-22  Bruno Haible  <bruno@clisp.org>
+	* relocatable.c (compute_curr_prefix): Comment out this function in
+	the case when it is not used.
+	Reported by Pavel Roskin <proski@gnu.org>.
+
 2004-01-21  Bruno Haible  <bruno@clisp.org>
 
 	Upgrade from gettext-0.14.

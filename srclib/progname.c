@@ -14,7 +14,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software Foundation,
-   Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
+   Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
 
 #ifdef HAVE_CONFIG_H
@@ -24,7 +24,6 @@
 /* Specification.  */
 #include "progname.h"
 
-#include <stdio.h>
 #include <string.h>
 
 #undef set_program_name
@@ -51,18 +50,4 @@ set_program_name (const char *argv0)
   if (strncmp (base, "lt-", 3) == 0)
     argv0 = base + 3;
   program_name = argv0;
-}
-
-
-/* Indicates whether errors and warnings get prefixed with program_name.
-   Default is true.  */
-bool error_with_progname = true;
-
-/* Print program_name prefix on stderr if and only if error_with_progname
-   is true.  */
-void
-maybe_print_progname ()
-{
-  if (error_with_progname)
-    fprintf (stderr, "%s: ", program_name);
 }

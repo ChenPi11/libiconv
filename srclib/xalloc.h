@@ -14,12 +14,17 @@
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software Foundation,
-   Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
+   Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
-#ifndef _XMALLOC_H
-#define _XMALLOC_H
+#ifndef _XALLOC_H
+#define _XALLOC_H
 
 #include <stddef.h>
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 
 /* Defined in xmalloc.c.  */
@@ -51,4 +56,9 @@ extern void xalloc_die (void)
 extern char *xstrdup (const char *string);
 
 
-#endif /* _XMALLOC_H */
+#ifdef __cplusplus
+}
+#endif
+
+
+#endif /* _XALLOC_H */

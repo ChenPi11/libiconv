@@ -85,6 +85,7 @@ check : all table-from.exe table-to.exe ../src/iconv.exe uniq-u.exe
 	$(srcdir)\check-stateless.bat $(srcdir) ISO-8859-8
 	$(srcdir)\check-stateless.bat $(srcdir) ISO-8859-9
 	$(srcdir)\check-stateless.bat $(srcdir) ISO-8859-10
+	$(srcdir)\check-stateless.bat $(srcdir) ISO-8859-11
 	$(srcdir)\check-stateless.bat $(srcdir) ISO-8859-13
 	$(srcdir)\check-stateless.bat $(srcdir) ISO-8859-14
 	$(srcdir)\check-stateless.bat $(srcdir) ISO-8859-15
@@ -124,6 +125,7 @@ check : all table-from.exe table-to.exe ../src/iconv.exe uniq-u.exe
 	$(srcdir)\check-stateless.bat $(srcdir) Georgian-Academy
 	$(srcdir)\check-stateless.bat $(srcdir) Georgian-PS
 	$(srcdir)\check-stateless.bat $(srcdir) KOI8-T
+	$(srcdir)\check-stateless.bat $(srcdir) PT154
 	$(srcdir)\check-stateless.bat $(srcdir) MuleLao-1
 	$(srcdir)\check-stateless.bat $(srcdir) CP1133
 	$(srcdir)\check-stateless.bat $(srcdir) TIS-620

@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2004 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2005 Free Software Foundation, Inc.
    This file is part of the GNU LIBICONV Library.
 
    The GNU LIBICONV Library is free software; you can redistribute it
@@ -13,8 +13,8 @@
 
    You should have received a copy of the GNU Library General Public
    License along with the GNU LIBICONV Library; see the file COPYING.LIB.
-   If not, write to the Free Software Foundation, Inc., 59 Temple Place -
-   Suite 330, Boston, MA 02111-1307, USA.  */
+   If not, write to the Free Software Foundation, Inc., 51 Franklin Street,
+   Fifth Floor, Boston, MA 02110-1301, USA.  */
 
 #include "config.h"
 #ifndef ICONV_CONST
@@ -41,6 +41,8 @@
 #include "binary-io.h"
 #include "progname.h"
 #include "relocatable.h"
+#include "uniwidth.h"
+#include "cjk.h"
 #include "gettext.h"
 
 #define _(str) gettext(str)
@@ -84,6 +86,26 @@ static int print_one (unsigned int namescount, const char * const * names,
   return 0;
 }
 
+/* Line number and column position. */
+static unsigned int line;
+static unsigned int column;
+static const char* cjkcode;
+/* Update the line number and column position after a character was
+   successfully converted. */
+static void update_line_column (unsigned int uc, void* data)
+{
+  if (uc == 0x000A) {
+    line++;
+    column = 0;
+  } else {
+    int width = uc_width(uc, cjkcode);
+    if (width >= 0)
+      column += width;
+    else if (uc == 0x0009)
+      column += 8 - (column % 8);
+  }
+}
+
 static int convert (iconv_t cd, FILE* infile, const char* infilename)
 {
   char inbuf[4096+4096];
@@ -94,6 +116,7 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
 #if O_BINARY
   SET_BINARY(fileno(infile));
 #endif
+  line = 1; column = 0;
   iconv(cd,NULL,NULL,NULL,NULL);
   for (;;) {
     size_t inbufsize = fread(inbuf+4096,1,4096,infile);
@@ -101,8 +124,12 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
       if (inbufrest == 0)
         break;
       else {
-        if (!silent)
-          fprintf(stderr,_("iconv: %s: incomplete character or shift sequence\n"),infilename);
+        if (!silent) {
+          fflush(stdout);
+          if (column > 0)
+            putc('\n',stderr);
+          fprintf(stderr,_("iconv: %s:%u:%u: incomplete character or shift sequence\n"),infilename,line,column);
+        }
         return 1;
       }
     } else {
@@ -127,14 +154,22 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
               discard_unconvertible = 2;
               status = 1;
             } else {
-              if (!silent)
-                fprintf(stderr,_("iconv: %s: cannot convert\n"),infilename);
+              if (!silent) {
+                fflush(stdout);
+                if (column > 0)
+                  putc('\n',stderr);
+                fprintf(stderr,_("iconv: %s:%u:%u: cannot convert\n"),infilename,line,column);
+              }
               return 1;
             }
           } else if (errno == EINVAL) {
             if (inbufsize == 0 || insize > 4096) {
-              if (!silent)
-                fprintf(stderr,_("iconv: %s: incomplete character or shift sequence\n"),infilename);
+              if (!silent) {
+                fflush(stdout);
+                if (column > 0)
+                  putc('\n',stderr);
+                fprintf(stderr,_("iconv: %s:%u:%u: incomplete character or shift sequence\n"),infilename,line,column);
+              }
               return 1;
             } else {
               inbufrest = insize;
@@ -150,7 +185,10 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
           } else if (errno != E2BIG) {
             if (!silent) {
               int saved_errno = errno;
-              fprintf(stderr,_("iconv: %s: "),infilename);
+              fflush(stdout);
+              if (column > 0)
+                putc('\n',stderr);
+              fprintf(stderr,_("iconv: %s:%u:%u: "),infilename,line,column);
               errno = saved_errno;
               perror("");
             }
@@ -178,18 +216,29 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
           discard_unconvertible = 2;
           status = 1;
         } else {
-          if (!silent)
-            fprintf(stderr,_("iconv: %s: cannot convert\n"),infilename);
+          if (!silent) {
+            fflush(stdout);
+            if (column > 0)
+              putc('\n',stderr);
+            fprintf(stderr,_("iconv: %s:%u:%u: cannot convert\n"),infilename,line,column);
+          }
           return 1;
         }
       } else if (errno == EINVAL) {
-        if (!silent)
-          fprintf(stderr,_("iconv: %s: incomplete character or shift sequence\n"),infilename);
+        if (!silent) {
+          fflush(stdout);
+          if (column > 0)
+            putc('\n',stderr);
+          fprintf(stderr,_("iconv: %s:%u:%u: incomplete character or shift sequence\n"),infilename,line,column);
+        }
         return 1;
       } else {
         if (!silent) {
           int saved_errno = errno;
-          fprintf(stderr,_("iconv: %s: "),infilename);
+          fflush(stdout);
+          if (column > 0)
+            putc('\n',stderr);
+          fprintf(stderr,_("iconv: %s:%u:%u: "),infilename,line,column);
           errno = saved_errno;
           perror("");
         }
@@ -198,6 +247,9 @@ static int convert (iconv_t cd, FILE* infile, const char* infilename)
     }
   }
   if (ferror(infile)) {
+    fflush(stdout);
+    if (column > 0)
+      putc('\n',stderr);
     fprintf(stderr,_("iconv: %s: I/O error\n"),infilename);
     return 1;
   }
@@ -210,6 +262,7 @@ int main (int argc, char* argv[])
   const char* tocode = NULL;
   int do_list = 0;
   iconv_t cd;
+  struct iconv_hooks hooks;
   int i;
   int status;
 
@@ -228,6 +281,10 @@ int main (int argc, char* argv[])
 #endif
   textdomain("libiconv");
   for (i = 1; i < argc;) {
+    if (!strcmp(argv[i],"--")) {
+      i++;
+      break;
+    }
     if (!strcmp(argv[i],"-f")) {
       if (i == argc-1) usage(1);
       if (fromcode != NULL) usage(1);
@@ -296,8 +353,19 @@ int main (int argc, char* argv[])
         fprintf(stderr,_("iconv: conversion to %s unsupported\n"),tocode);
       else
         fprintf(stderr,_("iconv: conversion from %s to %s unsupported\n"),fromcode,tocode);
+      fprintf(stderr,_("iconv: try '%s -l' to get the list of supported encodings\n"),program_name);
       exit(1);
     }
+    /* Look at fromcode and tocode, to determine whether character widths
+       should be determined according to legacy CJK conventions. */
+    cjkcode = iconv_canonicalize(tocode);
+    if (!is_cjk_encoding(cjkcode))
+      cjkcode = iconv_canonicalize(fromcode);
+    /* Set up hooks for updating the line and column position. */
+    hooks.uc_hook = update_line_column;
+    hooks.wc_hook = NULL;
+    hooks.data = NULL;
+    iconvctl(cd, ICONV_SET_HOOKS, &hooks);
     if (i == argc)
       status = convert(cd,stdin,_("(stdin)"));
     else {
@@ -319,7 +387,7 @@ int main (int argc, char* argv[])
     }
     iconv_close(cd);
   }
-  if (fflush(stdout) || ferror(stdout)) {
+  if (ferror(stdout) || fclose(stdout)) {
     fprintf(stderr,_("iconv: I/O error\n"));
     status = 1;
   }

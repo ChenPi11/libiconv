@@ -13,8 +13,8 @@
 
    You should have received a copy of the GNU Library General Public
    License along with the GNU C Library; see the file COPYING.LIB.  If not,
-   write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-   Boston, MA 02111-1307, USA.  */
+   write to the Free Software Foundation, Inc., 51 Franklin Street,
+   Fifth Floor, Boston, MA 02110-1301, USA.  */
 
 #if HAVE_CONFIG_H
 # include <config.h>
@@ -28,12 +28,8 @@ extern int errno;
 # define __set_errno(ev) ((errno) = (ev))
 #endif
 
-#if _LIBC || HAVE_STDLIB_H
-# include <stdlib.h>
-#endif
-#if _LIBC || HAVE_STRING_H
-# include <string.h>
-#endif
+#include <stdlib.h>
+#include <string.h>
 #if _LIBC || HAVE_UNISTD_H
 # include <unistd.h>
 #endif

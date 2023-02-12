@@ -15,6 +15,7 @@ ALL = \
  iso8859_8.h \
  iso8859_9.h \
  iso8859_10.h \
+ iso8859_11.h \
  iso8859_13.h \
  iso8859_14.h \
  iso8859_15.h \
@@ -52,6 +53,7 @@ ALL = \
  georgian_academy.h \
  georgian_ps.h \
  koi8_t.h \
+ pt154.h \
  mulelao.h \
  cp1133.h \
  tis620.h \
@@ -113,6 +115,7 @@ ALL = \
  cp1125.h \
  jisx0213.h \
  tds565.h \
+ atarist.h \
  riscos1.h \
  cjk_variants.h
 
@@ -139,7 +142,7 @@ iso8859_5.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-5.TXT 8bit_tab_to_h
 iso8859_6.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-6.TXT 8bit_tab_to_h
 	./8bit_tab_to_h ISO-8859-6 iso8859_6 < $<
 
-iso8859_7.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-7.TXT 8bit_tab_to_h
+iso8859_7.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-7-2003.TXT 8bit_tab_to_h
 	./8bit_tab_to_h ISO-8859-7 iso8859_7 < $<
 
 iso8859_8.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-8.TXT 8bit_tab_to_h
@@ -150,6 +153,9 @@ iso8859_9.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-9.TXT 8bit_tab_to_h
 
 iso8859_10.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-10.TXT 8bit_tab_to_h
 	./8bit_tab_to_h ISO-8859-10 iso8859_10 < $<
+
+iso8859_11.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-11.TXT 8bit_tab_to_h
+	./8bit_tab_to_h ISO-8859-11 iso8859_11 < $<
 
 iso8859_13.h : $(TABLESDIR)/unicode.org-mappings/ISO8859/8859-13.TXT 8bit_tab_to_h
 	./8bit_tab_to_h ISO-8859-13 iso8859_13 < $<
@@ -261,6 +267,9 @@ georgian_ps.h : $(TABLESDIR)/csets-1.6/GEO-PS.TXT 8bit_tab_to_h
 
 koi8_t.h : $(TABLESDIR)/glibc-2.2.90-iconv/KOI8-T.TXT
 	(echo '#' ; cat $<) | ./8bit_tab_to_h KOI8-T koi8_t
+
+pt154.h : $(TABLESDIR)/IANA/PTCP154.TXT
+	./8bit_tab_to_h PT154 pt154 < $<
 
 mulelao.h : $(TABLESDIR)/csets-new/MULELAO1.TXT 8bit_tab_to_h
 	./8bit_tab_to_h MULELAO-1 mulelao < $<
@@ -473,10 +482,13 @@ cp1125.h : $(TABLESDIR)/csets-new/CP1125.TXT 8bit_tab_to_h
 
 
 jisx0213.h : JISX0213.TXT cjk_tab_to_h
-	./cjk_tab_to_h JISX0213:2000 jisx0213 < $< > $@
+	./cjk_tab_to_h JISX0213:2004 jisx0213 < $< > $@
 
 tds565.h : $(TABLESDIR)/recode-cvs/TDS565.TXT 8bit_tab_to_h
 	(echo '#'; cat $<) | ./8bit_tab_to_h TDS565 tds565 > $@
+
+atarist.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MISC/ATARIST.TXT
+	./8bit_tab_to_h 'Atari ST' atarist < $< > $@
 
 riscos1.h : $(TABLESDIR)/recode-cvs/RISCOS-LATIN1.TXT 8bit_tab_to_h
 	(echo '#'; cat $<) | ./8bit_tab_to_h RISCOS-LATIN1 riscos1 > $@

@@ -1,5 +1,5 @@
 /* Declaration for error-reporting function
-   Copyright (C) 1995, 1996, 1997 Free Software Foundation, Inc.
+   Copyright (C) 1995, 1996, 1997, 2003 Free Software Foundation, Inc.
 
 
    NOTE: The canonical source of this file is maintained with the GNU C Library.
@@ -17,7 +17,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
    USA.  */
 
 #ifndef _ERROR_H
@@ -40,7 +40,7 @@
 extern "C" {
 #endif
 
-#if defined (__STDC__) && __STDC__
+#if (defined (__STDC__) && __STDC__) || defined _MSC_VER
 
 /* Print a message with `fprintf (stderr, FORMAT, ...)';
    if ERRNUM is nonzero, follow it with ": " and strerror (ERRNUM).
@@ -56,20 +56,20 @@ extern void error_at_line (int status, int errnum, const char *fname,
 /* If NULL, error will flush stdout, then print on stderr the program
    name, a colon and a space.  Otherwise, error will call this
    function without parameters instead.  */
-extern void (*error_print_progname) (void);
+extern DLL_VARIABLE void (*error_print_progname) (void);
 
 #else
 void error ();
 void error_at_line ();
-extern void (*error_print_progname) ();
+extern DLL_VARIABLE void (*error_print_progname) ();
 #endif
 
 /* This variable is incremented each time `error' is called.  */
-extern unsigned int error_message_count;
+extern DLL_VARIABLE unsigned int error_message_count;
 
 /* Sometimes we want to have at most one error per line.  This
    variable controls whether this mode is selected or not.  */
-extern int error_one_per_line;
+extern DLL_VARIABLE int error_one_per_line;
 
 #ifdef	__cplusplus
 }
