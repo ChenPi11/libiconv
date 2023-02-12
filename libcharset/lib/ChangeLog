@@ -1,3 +1,48 @@
+2006-07-14  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.in (clean): Remove also *.stackdump.
+
+2006-06-17  Bruno Haible  <bruno@clisp.org>
+
+	* config.charset: Update for NetBSD 3.0.
+
+2006-05-17  Bruno Haible  <bruno@clisp.org>
+
+	Cygwin portability.
+	* localcharset.c (WIN32_NATIVE): Renamed from WIN32.
+
+2006-05-16  Bruno Haible  <bruno@clisp.org>
+
+	* localcharset.c [CYGWIN]: Include <windows.h>.
+	(get_charset_aliases): For Cygwin, return the same CPxxx aliases list
+	as under WIN32.
+	(locale_charset) [CYGWIN]: Try to retrieve the encoding from the
+	environment variables. Fall back to GetACP().
+
+2006-04-05  Bruno Haible  <bruno@clisp.org>
+
+	* config.charset: Update Juan Manuel Guerrero's address.
+
+2006-01-10  Bruno Haible  <bruno@clisp.org>
+
+	* localcharset.c: Assume ANSI C. Fixes a gcc warning.
+	Reported by Werner Lemberg <wl@gnu.org>.
+
+2005-12-04  Bruno Haible  <bruno@clisp.org>
+
+	Cygwin portability.
+	* relocatable.c: Include <windows.h> also on Cygwin.
+	(DllMain): Add support for Cygwin.
+	(get_shared_library_fullname): Update.
+
+2005-07-24  Bruno Haible  <bruno@clisp.org>
+
+	Tidy up exported symbols.
+	* Makefile.in (CFLAGS): Add @CFLAG_VISIBILITY@.
+	(DEFS): Also define BUILDING_LIBCHARSET and BUILDING_DLL.
+	* relocatable.h (RELOCATABLE_DLL_EXPORTED) [HAVE_VISIBILITY]:
+	Define to the gcc visibility attribute.
+
 2005-07-02  Bruno Haible  <bruno@clisp.org>
 
 	* localcharset.c (get_charset_aliases) [WIN32]: Add CP65001 and others.
@@ -359,4 +404,3 @@
 	CP874, CP949, CP950, CP1250, CP1253, CP1254, CP1255, CP1256, CP1257
 	to the list of canonical encodings. Rename EUC-CN to GB2312.
 	* localcharset.c (locale_charset): Add support for Win32.
-

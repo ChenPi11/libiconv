@@ -1,3 +1,550 @@
+2006-07-19  Bruno Haible  <bruno@clisp.org>
+
+	* Version 1.11 released.
+
+2005-07-19  Bruno Haible  <bruno@clisp.org>
+
+	* srclib/Makefile.am (libicrt_a_SOURCES): Remove error.h, error.c.
+	(LIBADD_SOURCE): Add them here.
+
+2005-07-19  Bruno Haible  <bruno@clisp.org>
+
+	* build-aux/config.guess: Update to GNU version 2006-07-02.
+	* build-aux/config.sub: Likewise.
+
+2006-07-14  Bruno Haible  <bruno@clisp.org>
+
+	* lib/Makefile.in (clean): Remove also *.stackdump.
+	* src/Makefile.in (clean): Likewise.
+	* tests/Makefile.in (clean): Likewise.
+
+2006-07-14  Bruno Haible  <bruno@clisp.org>
+
+	* src/Makefile.in (clean): Remove also iconv_no_i18n. Needed for
+	cygwin or mingw.
+	* tests/Makefile.in (clean): Remove also the programs, without
+	EXEEXT. Needed for cygwin or mingw.
+	* Makefile.in (mostlyclean, clean, distclean, maintainer-clean):
+	Remove also bin directory. Needed for cygwin and mingw.
+
+2006-07-03  Bruno Haible  <bruno@clisp.org>
+
+	* src/iconv.c (check_subst_formatstring): Use ngettext.
+	(subst_wc_to_mb_fallback, subst_mb_to_mb_fallback): Fix error messages
+	after 2006-01-22 change.
+	* configure.ac: Require a gettext version with ngettext.
+
+2006-06-28  Bruno Haible  <bruno@clisp.org>
+
+        * m4/gettext.m4: Update from GNU gettext.
+        * m4/po.m4: Update from GNU gettext.
+
+2006-06-27  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.devel (AUTOCONF, AUTOHEADER): Use autoconf-2.60.
+	* Makefile.in (datarootdir): New variable.
+	(install, installdirs, uninstall): Also pass datarootdir.
+	* configure.ac (mandir): Remove customization.
+	* man/Makefile.in (datarootdir): New variable.
+	(docdir, htmldir): Use autoconf-substituted value.
+	* src/Makefile.in (datarootdir): New variable.
+	(localedir): Use autoconf-substituted value.
+
+2006-06-27  Bruno Haible  <bruno@clisp.org>
+
+	* m4/stdint.m4: Update from gnulib.
+	* srclib/stdint_.h: Update from gnulib.
+	* srclib/Makefile.am: Update.
+
+2006-06-17  Bruno Haible  <bruno@clisp.org>
+
+	* srclib/unsetenv.c: Update from GNU gettext.
+	* srclib/xreadlink.c: Likewise.
+
+2006-06-16  Bruno Haible  <bruno@clisp.org>
+
+	* m4/full-header-path.m4: New file, from gnulib.
+	* m4/size_max.m4: New file, from gnulib.
+	* m4/stdint.m4: Update from gnulib.
+	* srclib/stdint_.h: Update from gnulib.
+	* srclib/Makefile.am (stdint.h): Likewise.
+	* Makefile.devel (aclocal.m4): Update dependencies.
+
+2006-06-16  Bruno Haible  <bruno@clisp.org>
+
+	* m4/ssize_t.m4: Update from GNU gettext.
+
+2006-06-12  Bruno Haible  <bruno@clisp.org>
+
+	* m4/gettext.m4: Update from GNU gettext.
+	* m4/inttypes-h.m4: New file, from GNU gettext.
+	* m4/inttypes.m4: Remove file.
+	* m4/stdint.m4 (gl_STDINT_H): Update.
+	* Makefile.devel (aclocal.m4): Update dependencies.
+
+2006-06-10  Bruno Haible  <bruno@clisp.org>
+
+	* src/iconv.c (error) [NO_I18N]: Define here instead of including
+	error.h. Fixes link failure introduced on 2006-01-22.
+
+2006-03-28  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* m4/libtool.m4 (_LT_SYS_DYNAMIC_LINKER) [ linux ]: Avoid warning when
+	"parsing" /etc/ld.so.conf and empty /etc/ld.so.conf.d.
+
+2006-05-20  Bruno Haible  <bruno@clisp.org>
+
+	* tests/BIG5-HKSCS-1999-snippet: New file.
+	* tests/BIG5-HKSCS-1999-snippet.UTF-8: New file.
+	* tests/BIG5-HKSCS-2001-snippet: New file.
+	* tests/BIG5-HKSCS-2001-snippet.UTF-8: New file.
+	* tests/BIG5-HKSCS-2004-snippet: New file.
+	* tests/BIG5-HKSCS-2004-snippet.UTF-8: New file.
+	* tests/Makefile.in (check): Test also the stateful parts of
+	BIG5-HKSCS:1999, BIG5-HKSCS:2001, BIG5-HKSCS:2004.
+
+2006-05-17  Bruno Haible  <bruno@clisp.org>
+
+	Implement newer releases of BIG5-HKSCS.
+	* tools/Makefile (ALL): Remove hkscs.h, add hkscs1999.h, hkscs2001.h,
+	hkscs2004.h.
+	(hkscs.h): Remove rule.
+	(hkscs1999.h, hkscs2001.h, hkscs2004.h): New rules.
+	* tools/cjk_tab_to_h.c (output_title): Update year.
+	(main): Recognize hkscs1999, hkscs2001, hkscs2004.
+	* lib/encodings.def: Rename BIG5-HKSCS to BIG5-HKSCS:1999. Add
+	BIG5-HKSCS:2001, BIG5-HKSCS:2004. Make all three stateful.
+	* lib/hkscs.h: Remove file.
+	* lib/hkscs1999.h: New file.
+	* lib/hkscs2001.h: New file.
+	* lib/hkscs2004.h: New file.
+	* lib/big5hkscs.h: Remove file.
+	* lib/big5hkscs1999.h: New file.
+	* lib/big5hkscs2001.h: New file.
+	* lib/big5hkscs2004.h: New file.
+	* lib/converters.h: Include the new files.
+	* README, man/iconv_open.3: Add BIG5-HKSCS:1999, BIG5-HKSCS:2001.
+	* tests/BIG5-HKSCS.TXT: Remove file.
+	* tests/BIG5-HKSCS.IRREVERSIBLE.TXT: Remove file.
+	* tests/BIG5-HKSCS-1999.TXT: New file.
+	* tests/BIG5-HKSCS-1999.IRREVERSIBLE.TXT: New file.
+	* tests/BIG5-HKSCS-2001.TXT: New file.
+	* tests/BIG5-HKSCS-2001.IRREVERSIBLE.TXT: New file.
+	* tests/BIG5-HKSCS-2004.TXT: New file.
+	* tests/BIG5-HKSCS-2004.IRREVERSIBLE.TXT: New file.
+	* tests/check-stateless: Convert colon in the charset name to a dash in
+	the file name.
+	* tests/Makefile.in (check): Check BIG5-HKSCS:1999, BIG5-HKSCS:2001,
+	BIG5-HKSCS:2004 instead of just BIG5-HKSCS.
+	* tests/Makefile.msvc (check): Don't check BIG5-HKSCS.
+	* tests/Makefile.os2 (check): Likewise.
+
+2006-05-17  Bruno Haible  <bruno@clisp.org>
+
+	* srclib/progreloc.c: Update from GNU gettext.
+
+2006-05-16  Bruno Haible  <bruno@clisp.org>
+
+	* src/Makefile.in (clean): Use EXEEXT.
+	* tests/Makefile.in (check, clean): Likewise.
+
+2006-05-15  Bruno Haible  <bruno@clisp.org>
+
+	* configure.ac: Move some checks before AC_RELOCATABLE.
+
+2006-05-15  Bruno Haible  <bruno@clisp.org>
+
+	Support for building shared libraries on mingw and Cygwin.
+	* configure.ac (WOE32DLL, DLL_VARIABLE): New variables.
+	* include/iconv.h.in (_libiconv_version): Mark as DLL_VARIABLE.
+	* woe32dll/export.h: New file, from GNU gettext.
+	* woe32dll/iconv-exports.h: New file.
+	* Makefile.devel (include/iconv.h_vms, include/iconv.h.msvc-static,
+	include/iconv.h.msvc-shared): Remove the DLL_VARIABLE annotation.
+	* lib/Makefile.in (INCLUDES): Add -I for parent directory.
+	(LDFLAGS): Add WOE32DLL dependent flags.
+	(LDFLAGS_yes, LDFLAGS_no): New variables.
+	(OBJECTS): Add WOE32DLL dependent objects.
+	(OBJECTS_yes, OBJECTS_no): New variables.
+	(iconv-exports.lo): New rule.
+
+2006-05-15  Bruno Haible  <bruno@clisp.org>
+
+	* srclib/gettext.h: Update from GNU gettext.
+	* srclib/pathmax.h: Update from GNU gettext.
+	* srclib/progreloc.c: Update from GNU gettext.
+	* srclib/unsetenv.c: Update from GNU gettext.
+	* srclib/Makefile.am: Add snippet for creation of unistd.h.
+	* m4/extensions.m4: Update from GNU gettext.
+	* m4/gettext.m4: Update from GNU gettext.
+	* m4/lib-ld.m4: Update from GNU gettext.
+	* m4/lib-link.m4: Update from GNU gettext.
+	* m4/lib-prefix.m4: Update from GNU gettext.
+	* m4/longdouble.m4: Update from GNU gettext.
+	* m4/nls.m4: Update from GNU gettext.
+	* m4/onceonly.m4: Update from GNU gettext.
+	* m4/po.m4: Update from GNU gettext.
+	* m4/relocatable.m4: Update from GNU gettext.
+	* m4/unistd_h.m4: New file, from GNU gettext.
+	* Makefile.devel (aclocal.m4): Depend on it.
+	* configure.ac: Invoke gl_HEADER_UNISTD.
+
+2006-05-14  Bruno Haible  <bruno@clisp.org>,
+            Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* m4/libtool.m4 [ linux ] (AC_LIBTOOL_LANG_CXX_CONFIG)
+	(AC_LIBTOOL_POSTDEP_PREDEP, AC_LIBTOOL_PROG_COMPILER_PIC)
+	(AC_LIBTOOL_PROG_LD_SHLIBS): Add support for Sun C 5.9,
+	Sun C++ 5.9, and Sun Fortran 8.3 on Linux.
+
+2006-05-06  Charles Wilson  <cygwin@cwilson.fastmail.fm>
+
+	* m4/libtool.m4: On Cygwin, like on mingw, define DLL_EXPORT when
+	compiling a shared library object.
+
+2006-05-15  Bruno Haible  <bruno@clisp.org>
+
+	* build-aux/config.rpath: Add support for Sun C 5.9 on Linux.
+
+2006-03-31  Juan Manuel Guerrero <juan.guerrero@gmx.de>
+
+	* djgpp/*: Update.
+
+2006-01-23  Bruno Haible  <bruno@clisp.org>
+
+	* configure.ac: Invoke gl_ALLOCSA.
+
+	* Makefile.devel (aclocal.m4): Depend on $(CONFIGURES_IN).
+
+2006-01-22  Bruno Haible  <bruno@clisp.org>
+
+	* src/iconv.c (xmalloc, xalloc_die) [NO_I18N]: Define to avoid using
+	gettext().
+
+2006-01-22  Bruno Haible  <bruno@clisp.org>
+
+	* lib/Makefile.in (LIBICONV_VERSION_INFO): Bump to 6:0:4.
+
+2006-01-22  Bruno Haible  <bruno@clisp.org>
+
+	* src/iconv.c: Include error.h, exit.h.
+	(print_version): Use EXIT_SUCCESS.
+	(check_subst_formatstring, subst_mb_to_uc_fallback,
+	subst_uc_to_mb_fallback, subst_mb_to_wc_fallback,
+	subst_wc_to_mb_fallback, subst_mb_to_mb_fallback, convert, main): Use
+	error() instead of fprintf to stderr.
+
+2006-01-22  Bruno Haible  <bruno@clisp.org>
+
+	New feature: character-dependent substitutions.
+	* include/iconv.h.in (iconv_unicode_mb_to_uc_fallback,
+	iconv_unicode_uc_to_mb_fallback, iconv_wchar_mb_to_wc_fallback,
+	iconv_wchar_wc_to_mb_fallback): New types.
+	(struct iconv_fallbacks): New structure type.
+	(ICONV_SET_FALLBACKS): New macro.
+	* configure.ac: Invoke gt_TYPE_WCHAR_T and substitute HAVE_WCHAR_T.
+	* Makefile.os2 (all): Also substitute @HAVE_WCHAR_T@ in build/iconv.h.
+	* Makefile.devel (include/iconv.h_vms, include/iconv.h.msvc-static,
+	include/iconv.h.msvc-shared): Also substitute @HAVE_WCHAR_T@.
+	* lib/converters.h (struct conv_struct): Add field 'fallbacks'.
+	* lib/loop_unicode.h (struct uc_to_mb_fallback_locals): New type.
+	(uc_to_mb_write_replacement): New function.
+	(struct mb_to_uc_fallback_locals): New type.
+	(mb_to_uc_write_replacement): New function.
+	(unicode_loop_convert): Call mb_to_uc_fallback and uc_to_mb_fallback.
+	(unicode_loop_reset): Call uc_to_mb_fallback.
+	* lib/loop_wchar.h (struct wc_to_mb_fallback_locals): New type.
+	(wc_to_mb_write_replacement): New function.
+	(wchar_from_loop_convert): Call wc_to_mb_fallback.
+	(struct mb_to_wc_fallback_locals): New type.
+	(mb_to_wc_write_replacement): New function.
+	(wchar_to_loop_convert): Call mb_to_wc_fallback.
+	* lib/iconv.c (iconv_open): Initialize the 'fallbacks' field.
+	(iconvctl): Handle ICONV_SET_FALLBACKS.
+	* lib/genflags.c (struct iconv_fallbacks): New dummy definition.
+	* src/iconv.c: Include limits.h.
+	(isdigit, c_isprint): New macros.
+	(usage): Document long options and new options.
+	(check_subst_formatstring): New function.
+	(ilseq_byte_subst, ilseq_wchar_subst, ilseq_unicode_subst): New
+	variables.
+	(ilseq_byte_subst_size, ilseq_wchar_subst_size,
+	ilseq_unicode_subst_size): New variables.
+	(ilseq_byte_subst_buffer, ilseq_wchar_subst_buffer,
+	ilseq_unicode_subst_buffer): New variables.
+	(subst_mb_to_uc_cd, subst_mb_to_uc_temp_buffer): New variables.
+	(subst_mb_to_uc_fallback): New function.
+	(subst_uc_to_mb_cd, subst_uc_to_mb_temp_buffer): New variables.
+	(subst_uc_to_mb_fallback): New function.
+	(subst_mb_to_wc_cd, subst_mb_to_wc_temp_buffer): New variables.
+	(subst_mb_to_wc_fallback): New function.
+	(subst_wc_to_mb_cd, subst_wc_to_mb_temp_buffer): New variables.
+	(subst_wc_to_mb_fallback): New function.
+	(subst_mb_to_mb_cd, subst_mb_to_mb_temp_buffer): New variables.
+	(subst_mb_to_mb_fallback): New function.
+	(convert): Enlarge the outbuf when the conversion failed with E2BIG.
+	(main): Handle new options --byte-subst, --widechar-subst,
+	--unicode-subst.
+	* man/iconv.1: Document --unicode-subst, --byte-subst, --widechar-subst
+	options.
+	* tests/check-subst: New file.
+	* tests/Makefile.in (check): Also invoke check-subst.
+	Suggested by James Taylor <james@oakseed.demon.co.uk>.
+
+2006-01-21  Bruno Haible  <bruno@clisp.org>
+
+	* src/iconv.c (print_version): Bump copyright year.
+	(main): Accept long options --from-code, --to-code, --list, --silent.
+	Accept abbreviated long options, like getopt() does.
+	* man/iconv.1: Document long options.
+
+2005-12-29  Bruno Haible  <bruno@clisp.org>
+
+	* src/iconv.c (print_version): Update copyright year.
+
+2005-12-29  Bruno Haible  <bruno@clisp.org>
+
+	* configure.ac: Renamed from configure.in.
+	* Makefile.devel (CONFIGURES_IN, configure, config.h.in): Update.
+
+2005-12-29  Bruno Haible  <bruno@clisp.org>
+
+	* configure.in: Bump version number.
+	* include/iconv.h.in (_LIBICONV_VERSION): Likewise.
+	* windows/iconv.rc: Likewise.
+	* lib/Makefile.in (LIBICONV_VERSION_INFO): Bump to 5:1:3.
+
+2005-12-29  Bruno Haible  <bruno@clisp.org>
+
+	* build-aux/config.guess: Update to GNU version 2005-12-23.
+	* build-aux/config.sub: Likewise.
+	* build-aux/config.libpath: Update from GNU gettext.
+	* build-aux/install-sh: Upgrade to automake-1.9.5.
+	* build-aux/missing: Upgrade to automake-1.9.5.
+	* build-aux/mkinstalldirs: Upgrade to automake-1.9.5.
+
+2005-12-29  Bruno Haible  <bruno@clisp.org>
+
+	* m4/alloca.m4: Update from GNU gettext.
+	* m4/allocsa.m4: Update from GNU gettext.
+	* m4/canonicalize.m4: Update from GNU gettext.
+	* m4/codeset.m4: Update from GNU gettext.
+	* m4/eealloc.m4: Update from GNU gettext.
+	* m4/error.m4: Update from GNU gettext.
+	* m4/extensions.m4: Update from GNU gettext.
+	* m4/gettext.m4: Update from GNU gettext.
+	* m4/glibc21.m4: Update from GNU gettext.
+	* m4/iconv.m4: Update from GNU gettext.
+	* m4/intmax.m4: Update from GNU gettext.
+	* m4/inttypes_h.m4: New file, from GNU gettext.
+	* m4/isc-posix.m4: Update from GNU gettext.
+	* m4/lcmessage.m4: Update from GNU gettext.
+	* m4/longdouble.m4: Update from GNU gettext.
+	* m4/longlong.m4: Update from GNU gettext.
+	* m4/mbstate_t.m4: Update from GNU gettext.
+	* m4/nls.m4: Update from GNU gettext.
+	* m4/onceonly.m4: Update from GNU gettext.
+	* m4/pathmax.m4: Update from GNU gettext.
+	* m4/po.m4: Update from GNU gettext.
+	* m4/printf-posix.m4: Update from GNU gettext.
+	* m4/progtest.m4: Update from GNU gettext.
+	* m4/readlink.m4: Update from GNU gettext.
+	* m4/relocatable.m4: Update from GNU gettext.
+	* m4/setenv.m4: Update from GNU gettext.
+	* m4/signed.m4: Update from GNU gettext.
+	* m4/ssize_t.m4: Update from GNU gettext.
+	* m4/stdbool.m4: Update from GNU gettext.
+	* m4/stdint_h.m4: New file, from GNU gettext.
+	* m4/strerror.m4: Update from GNU gettext.
+	* m4/strerror_r.m4: Update from GNU gettext.
+	* m4/unlocked-io.m4: Update from GNU gettext.
+	* m4/wchar_t.m4: Update from GNU gettext.
+	* m4/wint_t.m4: Update from GNU gettext.
+	* m4/xreadlink.m4: Update from GNU gettext.
+	* Makefile.devel (aclocal.m4): Depend on m4/inttypes_h.m4 and
+	m4/stdint_h.m4 as well.
+	* configure.in: Invoke AC_TYPE_MBSTATE_T instead of AC_MBSTATE_T.
+	Invoke gl_FUNC_GLIBC_UNLOCKED_IO instead of jm_FUNC_GLIBC_UNLOCKED_IO.
+	Invoke gl_ERROR instead of gt_FUNC_ERROR_AT_LINE.
+	Don't invoke AC_AIX and AC_MINIX, done by gl_USE_SYSTEM_EXTENSIONS.
+	Temporarily redefine AC_LIBOBJ and AC_REPLACE_FUNCS, so as to fill
+	SRCLIBOBJS instead of LIBOBJS.
+	* srclib/alloca_.h: Update from GNU gettext.
+	* srclib/allocsa.h: Update from GNU gettext.
+	* srclib/canonicalize.c: Update from GNU gettext.
+	* srclib/error.h: Update from GNU gettext.
+	* srclib/error.c: Update from GNU gettext.
+	* srclib/gettext.h: Update from GNU gettext.
+	* srclib/memmove.c: Update from GNU gettext.
+	* srclib/progname.h: Update from GNU gettext.
+	* srclib/progname.c: Update from GNU gettext.
+	* srclib/progreloc.c: Update from GNU gettext.
+	* srclib/readlink.c: Update from GNU gettext.
+	* srclib/relocatable.c: Update from GNU gettext.
+	* srclib/relocwrapper.c: Update from GNU gettext.
+	* srclib/setenv.h: Update from GNU gettext.
+	* srclib/setenv.c: Update from GNU gettext.
+	* srclib/stdbool_.h: Update from GNU gettext.
+	* srclib/stdint_.h: Update from gnulib.
+	* srclib/strerror.c: Update from GNU gettext.
+	* srclib/unlocked-io.h: Update from GNU gettext.
+	* srclib/unsetenv.c: Update from GNU gettext.
+	* srclib/xalloc.h: Update from GNU gettext.
+	* srclib/xmalloc.c: Update from GNU gettext.
+	* srclib/xreadlink.c: Update from GNU gettext.
+	* srclib/xstrdup.c: Update from GNU gettext.
+	* srclib/Makefile.am (DEFS): Also define EXEEXT.
+	(libicrt_a_LIBADD): Use SRCLIBOBJS instead of LIBOBJS.
+	(libicrt_a_DEPENDENCIES): New variable.
+	* src/Makefile.in (EXEEXT): New variable.
+	* build-aux/install-reloc: Update from GNU gettext.
+	* build-aux/reloc-ldflags: Update from GNU gettext.
+	* build-aux/config.rpath: Update from GNU gettext.
+
+2005-12-29  Bruno Haible  <bruno@clisp.org>
+
+	* m4/libtool.m4: Update, based on libtool-1.5.22.
+	* build-aux/ltmain.sh: Update, based on libtool-1.5.22.
+
+2005-12-24  Bruno Haible  <bruno@clisp.org>
+
+	Check the whole range of GB18030.
+	* tests/GB18030-BMP.TXT: Renamed from tests/GB18030.TXT.
+	* tests/gengb18030z.c: New file.
+	* tests/table-from.c (main): For GB18030, don't stop at U+10000.
+	* tests/table-to.c (main): Likewise.
+	* tests/Makefile.in (check): Generate GB18030.TXT on the fly from
+	GB18030-BMP.TXT.
+	(clean): Remove also gengb18030z and GB18030.TXT.
+	* tests/Makefile.msvc (check): Generate GB18030.TXT on the fly from
+	GB18030-BMP.TXT.
+	(clean): Remove also GB18030Z.TXT, GB18030TMP.TXT, GB18030.TXT.
+	* tests/Makefile.os2 (check): Depend on gengb18030z.exe. Generate
+	GB18030.TXT on the fly from GB18030-BMP.TXT.
+	(clean): Remove also GB18030Z.TXT, GB18030TMP.TXT, GB18030.TXT.
+
+2005-12-20  Bruno Haible  <bruno@clisp.org>
+
+	* tests/table-to.c (main): Test the mappings up to U+10FFFF, not only
+	up to U+2FFFF. Tolerate that Unicode language tags are silently mapped
+	to nothing.
+
+2005-12-22  Bruno Haible  <bruno@clisp.org>
+
+	Extend GB18030 converter to cover the entire Unicode PUA.
+	* lib/gb18030.h: Update comments, based on second printing.
+	(gb18030_mbtowc): Add mapping for range U+E000..U+E765.
+	(gb18030_pua2charset): New array.
+	(gb18030_wctomb): Add mapping for range U+E000..U+E765 and the two-byte
+	part of range U+E766..U+E864.
+	* lib/gb18030ext.h (gb18030ext_2uni_pagefe): Add mappings to private
+	area.
+	(gb18030ext_mbtowc): Add mapping for the two-byte part of range
+	U+E766..U+E864.
+	* lib/gb18030uni.h (gb18030uni_charset2uni_ranges,
+	gb18030uni_uni2charset_ranges, gb18030uni_ranges): Add 12 more
+	intervals.
+	(gb18030uni_mbtowc, gb18030uni_wctomb): Update.
+	* tests/GB18030.TXT: Complete mappings to private area.
+
+2005-12-22  Bruno Haible  <bruno@clisp.org>
+
+	* lib/gbk.h: Update comments.
+
+2005-12-20  Bruno Haible  <bruno@clisp.org>
+
+	Add private area mappings to CP949.
+	* lib/cp949.h (cp949_mbtowc, cp949_wctomb): Map U+E000..U+E0BB like
+	many others do it.
+	* tests/CP949.TXT: Add mappings for U+E000..U+E0BB.
+
+2005-12-15  Bruno Haible  <bruno@clisp.org>
+
+	Add private area mappings to CP950.
+	* lib/cp950.h (cp950_mbtowc, cp950_wctomb): Map U+E000..U+F6B0 like
+	most others do it.
+	* tests/CP950.TXT: Add mappings for U+E000..U+F6B0.
+
+2005-12-15  Bruno Haible  <bruno@clisp.org>
+
+	Make CP936 follow what Microsoft does.
+	In http://www.microsoft.com/globaldev/reference/dbcs/936.mspx they
+	added a 0x80 - U+20AC mapping to the code chart, but not to the
+	tooltips and not to the list of mappings.
+	* lib/cp936.h: New file.
+	* lib/gbk.h: Update comments.
+	* lib/ces_gbk.h: Update comments.
+	* lib/converters.h: Include cp936.h.
+	* lib/encodings.def (CP936): New encoding.
+	(GBK): Remove CP936 aliases.
+	* README, man/iconv_open.3: Add CP936.
+	* tests/Makefile.in (check): Check CP936.
+	* tests/Makefile.msvc (check): Likewise.
+	* tests/Makefile.os2 (check): Likewise.
+	* tests/CP936.TXT: New file.
+
+2005-12-14  Bruno Haible  <bruno@clisp.org>
+
+	* lib/cp932.h (cp932_wctomb): Map U+FF5E, U+2225, U+FF0D, U+FFE0,
+	U+FFE1 like Microsoft does it.
+	* lib/CP932.IRREVERSIBLE.TXT: Add these mappings.
+	Reported by Lei Wang <lwang@qilinsoft.com>.
+
+2005-12-14  Bruno Haible  <bruno@clisp.org>
+
+	Follow Euro sign addition done in 1999 in
+	http://www.microsoft.com/globaldev/reference/dbcs/950/950_A3.mspx
+	* lib/cp950.h (cp950_mbtowc, cp950_wctomb): Add mapping for 0xA3E1.
+	* tests/CP950.TXT: Add mapping for 0xA3E1.
+
+2005-11-11  Bruno Haible  <bruno@clisp.org>
+
+	* lib/euc_jp.h (euc_jp_wctomb): When writing a 3-bytes byte sequence
+	and only two bytes are available in the output buffer, return
+	RET_TOOSMALL instead of overrunning the output buffer.
+	* lib/isoir165.h (isoir165_wctomb): When only one byte is available
+	in the output buffer, don't overrun the output buffer.
+	Reported by William Bardwell <bardwell@curl.com>.
+
+2005-09-18  Bruno Haible  <bruno@clisp.org>
+
+	* m4/libtool.m4: Update, based on libtool-1.5.20.
+	* build-aux/ltmain.sh: Update, based on libtool-1.5.20.
+
+2005-08-12  Bruno Haible  <bruno@clisp.org>
+
+	* lib/big5_2003.h: Map 0xF9FA..0xF9FD differently.
+	* tests/BIG5-2003.TXT: Likewise.
+	* tests/BIG5-2003.IRREVERSIBLE.TXT: New file.
+	Reported by Ping Yeh <ping@pingyeh.net>.
+
+2005-07-24  Bruno Haible  <bruno@clisp.org>
+
+	Tidy up exported symbols.
+	* m4/visibility.m4: New file.
+	* include/export.h: New file.
+	* configure.in: Invoke gl_VISIBILITY. Use AC_CONFIG_FILES. Arrange to
+	create also include/iconv.h.inst.
+	* Makefile.devel (all): Depend on include/iconv.h.build.in.
+	(aclocal.m4): Depend on m4/visibility.m4.
+	(include/iconv.h.build.in): New rule.
+	* Makefile.in (install-lib, install): Install include/iconv.h.inst,
+	not the include/iconv.h that was used for building.
+	(distclean, maintainer-clean): Remove also include/iconv.h.inst.
+	* lib/Makefile.in (CFLAGS): Add @CFLAG_VISIBILITY@.
+	(DEFS): Also define BUILDING_LIBICONV and BUILDING_DLL.
+	* lib/config.h.in (HAVE_VISIBILITY): New macro.
+	* lib/relocatable.h (RELOCATABLE_DLL_EXPORTED) [HAVE_VISIBILITY]:
+	Define to the gcc visibility attribute.
+	* srclib/relocatable.h (RELOCATABLE_DLL_EXPORTED) [HAVE_VISIBILITY]:
+	Likewise.
+
+2005-07-25  Bruno Haible  <bruno@clisp.org>
+
+	2003-08-24  Bruno Haible  <bruno@clisp.org>
+	* lib/relocatable.h: Make this file includable in C++ mode: add extern
+	"C".
+
 2005-07-08  Bruno Haible  <bruno@clisp.org>
 
 	* Version 1.10 released.

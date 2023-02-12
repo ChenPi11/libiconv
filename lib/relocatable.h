@@ -1,5 +1,5 @@
 /* Provide relocatable packages.
-   Copyright (C) 2003 Free Software Foundation, Inc.
+   Copyright (C) 2003, 2005 Free Software Foundation, Inc.
    Written by Bruno Haible <bruno@clisp.org>, 2003.
 
    This program is free software; you can redistribute it and/or modify it
@@ -20,13 +20,20 @@
 #ifndef _RELOCATABLE_H
 #define _RELOCATABLE_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 /* This can be enabled through the configure --enable-relocatable option.  */
 #if ENABLE_RELOCATABLE
 
 /* When building a DLL, we must export some functions.  Note that because
    this is a private .h file, we don't need to use __declspec(dllimport)
    in any case.  */
-#if defined _MSC_VER && BUILDING_DLL
+#if HAVE_VISIBILITY && BUILDING_DLL
+# define RELOCATABLE_DLL_EXPORTED __attribute__((__visibility__("default")))
+#elif defined _MSC_VER && BUILDING_DLL
 # define RELOCATABLE_DLL_EXPORTED __declspec(dllexport)
 #else
 # define RELOCATABLE_DLL_EXPORTED
@@ -62,6 +69,11 @@ extern const char * compute_curr_prefix (const char *orig_installprefix,
 /* By default, we use the hardwired pathnames.  */
 #define relocate(pathname) (pathname)
 
+#endif
+
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif /* _RELOCATABLE_H */

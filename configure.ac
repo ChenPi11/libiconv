@@ -1,4 +1,4 @@
-dnl Copyright (C) 1999-2005 Free Software Foundation, Inc.
+dnl Copyright (C) 1999-2006 Free Software Foundation, Inc.
 dnl This file is part of the GNU LIBICONV Library.
 dnl
 dnl The GNU LIBICONV Library is free software; you can redistribute it
@@ -20,14 +20,9 @@ AC_PREREQ(2.52)
 AC_INIT
 AC_CONFIG_SRCDIR(lib/iconv.c)
 AC_CONFIG_AUX_DIR(build-aux)
-AM_INIT_AUTOMAKE(libiconv, 1.10)
+AM_INIT_AUTOMAKE(libiconv, 1.11)
 AC_CONFIG_HEADERS(config.h lib/config.h)
 AC_PROG_MAKE_SET
-
-dnl           installation directories
-
-dnl Prefer modern Filesystem Hierarchy Standard over antiquated GNU standards.
-test "$mandir" != '${prefix}/man' || mandir='${datadir}/man'
 
 dnl           checks for basic programs
 
@@ -39,6 +34,21 @@ AC_PROG_INSTALL
 dnl           check for host type
 
 AC_CANONICAL_HOST
+
+dnl           hack
+
+dnl Hack to work around limitations of automake and error.m4 regarding LIBOBJS.
+dnl "srclib/Makefile.am:32: automatically discovered file `error.h' should not be explicitly mentioned"
+AC_DEFUN([my_SRCLIB_OBJ],[SRCLIBOBJS="$SRCLIBOBJS $1.$ac_objext"])
+AC_DEFUN([my_SRCLIB_REPLACE_FUNCS], [AC_CHECK_FUNCS([$1], , [my_SRCLIB_OBJ($ac_func)])])
+m4_pushdef([AC_LIBOBJ], m4_defn([my_SRCLIB_OBJ]))
+m4_pushdef([AC_REPLACE_FUNCS], m4_defn([my_SRCLIB_REPLACE_FUNCS]))
+
+dnl           checks for UNIX variants that set DEFS
+
+AC_GNU_SOURCE
+gl_USE_SYSTEM_EXTENSIONS
+AC_ISC_POSIX
 
 dnl           checks for installer options
 
@@ -60,14 +70,6 @@ CL_PROG_CP
 CL_PROG_LN
 AC_PROG_LN_S
 
-dnl           checks for UNIX variants that set DEFS
-
-AC_GNU_SOURCE
-gl_USE_SYSTEM_EXTENSIONS
-AC_AIX
-AC_MINIX
-AC_ISC_POSIX
-
 dnl           checks for compiler output filename suffixes
 
 AC_OBJEXT
@@ -78,18 +80,21 @@ dnl           check for build configuration
 AC_DISABLE_STATIC
 AC_LIBTOOL_WIN32_DLL
 AC_PROG_LIBTOOL
+gl_VISIBILITY
 AM_ICONV
-AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT([external], [need-ngettext])
 
 dnl           checks for header files
 
 AC_HEADER_STDC
 AC_CHECK_HEADERS([locale.h stddef.h stdlib.h string.h])
+gl_HEADER_UNISTD
 
 dnl           checks for typedefs
 
-AC_MBSTATE_T
+AC_TYPE_MBSTATE_T
 gl_STDINT_H
+gt_TYPE_WCHAR_T
 
 dnl           checks for functions and declarations
 
@@ -99,6 +104,13 @@ else
   ICONV_CONST="const"
 fi
 AC_SUBST(ICONV_CONST)
+
+if test $gt_cv_c_wchar_t = yes; then
+  HAVE_WCHAR_T=1
+else
+  HAVE_WCHAR_T=0
+fi
+AC_SUBST(HAVE_WCHAR_T)
 
 AC_CHECK_FUNCS([getc_unlocked mbrtowc wcrtomb mbsinit setlocale])
 AC_REPLACE_FUNCS([memmove])
@@ -110,15 +122,23 @@ AC_EILSEQ
 CL_WORDS_LITTLEENDIAN
 
 gl_FUNC_ALLOCA
+gl_ALLOCSA
 gl_CANONICALIZE
-jm_FUNC_GLIBC_UNLOCKED_IO
-gt_FUNC_ERROR_AT_LINE
+gl_FUNC_GLIBC_UNLOCKED_IO
+gl_ERROR
 gl_PATHMAX
 gt_FUNC_SETENV
 AM_STDBOOL_H
 gl_FUNC_STRERROR
 gl_FUNC_READLINK
 gl_XREADLINK
+
+dnl           hack
+
+dnl End of hack to work around limitations of automake and error.m4.
+m4_popdef([AC_REPLACE_FUNCS])
+m4_popdef([AC_LIBOBJ])
+AC_SUBST([SRCLIBOBJS])
 
 dnl           check whether OS supports plug libraries
 
@@ -137,6 +157,30 @@ else
 fi
 AC_SUBST(PLUGLIB)
 
+dnl Compilation on mingw and Cygwin needs special Makefile rules, because
+dnl 1. when we install a shared library, we must arrange to export
+dnl    auxiliary pointer variables for every exported variable,
+dnl 2. when we install a shared library and a static library simultaneously,
+dnl    the include file specifies __declspec(dllimport) and therefore we
+dnl    must arrange to define the auxiliary pointer variables for the
+dnl    exported variables _also_ in the static library.
+if test "$enable_shared" = yes; then
+  case "$host_os" in
+    mingw* | cygwin*) is_woe32dll=yes ;;
+    *) is_woe32dll=no ;;
+  esac
+else
+  is_woe32dll=no
+fi
+WOE32DLL=$is_woe32dll
+AC_SUBST([WOE32DLL])
+if test $is_woe32dll = yes; then
+  DLL_VARIABLE='__declspec (dllimport)'
+else
+  DLL_VARIABLE=
+fi
+AC_SUBST([DLL_VARIABLE])
+
 AH_BOTTOM([
 /* On Windows, variables that may be in a DLL must be marked specially.  */
 #if defined _MSC_VER && defined _DLL
@@ -146,10 +190,16 @@ AH_BOTTOM([
 #endif
 ])
 
-if test -d "${srcdir}/tests"; then
-  TESTS_MAKEFILE=tests/Makefile
-else
-  TESTS_MAKEFILE=""
-fi
 AC_CONFIG_SUBDIRS(libcharset)
-AC_OUTPUT(Makefile lib/Makefile srclib/Makefile src/Makefile po/Makefile.in man/Makefile ${TESTS_MAKEFILE} include/iconv.h)
+AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([lib/Makefile])
+AC_CONFIG_FILES([srclib/Makefile])
+AC_CONFIG_FILES([src/Makefile])
+AC_CONFIG_FILES([po/Makefile.in])
+AC_CONFIG_FILES([man/Makefile])
+if test -d "${srcdir}/tests"; then
+  AC_CONFIG_FILES([tests/Makefile])
+fi
+AC_CONFIG_FILES([include/iconv.h:include/iconv.h.build.in])
+AC_CONFIG_FILES([include/iconv.h.inst:include/iconv.h.in])
+AC_OUTPUT

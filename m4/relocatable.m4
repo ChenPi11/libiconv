@@ -1,5 +1,5 @@
-# relocatable.m4 serial 3 (gettext-0.15)
-dnl Copyright (C) 2003, 2005 Free Software Foundation, Inc.
+# relocatable.m4 serial 5 (gettext-0.15)
+dnl Copyright (C) 2003, 2005-2006 Free Software Foundation, Inc.
 dnl This file is free software; the Free Software Foundation
 dnl gives unlimited permission to copy and/or distribute it,
 dnl with or without modifications, as long as this notice is preserved.
@@ -13,6 +13,7 @@ AC_DEFUN([AC_RELOCATABLE],
   AC_BEFORE([AC_PROG_INSTALL],[AC_RELOCATABLE])
   AC_REQUIRE([AC_LIB_LIBPATH])
   AC_REQUIRE([AC_RELOCATABLE_LIBRARY])
+  AC_REQUIRE([AC_EXEEXT])
   is_noop=no
   use_elf_origin_trick=no
   if test $RELOCATABLE = yes; then
@@ -21,6 +22,8 @@ AC_DEFUN([AC_RELOCATABLE],
     AC_LIBOBJ([relocatable])
     AC_DEFINE([ENABLE_RELOCATABLE], 1,
       [Define to 1 if the package shall run at any location in the filesystem.])
+    AC_CHECK_HEADERS([unistd.h mach-o/dyld.h])
+    AC_CHECK_FUNCS([_NSGetExecutablePath])
     case "$host_os" in
       mingw*) is_noop=yes ;;
       linux*) use_elf_origin_trick=yes ;;
@@ -40,7 +43,7 @@ AC_DEFUN([AC_RELOCATABLE],
         dnl consisting of more than one word - libtool doesn't support this.
         dnl So we abuse the INSTALL_PROGRAM_ENV hook, originally meant for the
         dnl 'install-strip' target.
-        SET_RELOCATABLE="INSTALL_PROGRAM_ENV = RELOC_LIBRARY_PATH_VAR=\"$shlibpath_var\" RELOC_LIBRARY_PATH_VALUE=\"\$(RELOCATABLE_LIBRARY_PATH)\" RELOC_PREFIX=\"\$(prefix)\" RELOC_COMPILE_COMMAND=\"\$(CC) \$(CPPFLAGS) \$(CFLAGS) \$(LDFLAGS)\" RELOC_SRCDIR=\"\$(RELOCATABLE_SRC_DIR)\" RELOC_BUILDDIR=\"\$(RELOCATABLE_BUILD_DIR)\" RELOC_CONFIG_H_DIR=\"\$(RELOCATABLE_CONFIG_H_DIR)\" RELOC_INSTALL_PROG=\"$INSTALL_PROGRAM\""
+        SET_RELOCATABLE="INSTALL_PROGRAM_ENV = RELOC_LIBRARY_PATH_VAR=\"$shlibpath_var\" RELOC_LIBRARY_PATH_VALUE=\"\$(RELOCATABLE_LIBRARY_PATH)\" RELOC_PREFIX=\"\$(prefix)\" RELOC_COMPILE_COMMAND=\"\$(CC) \$(CPPFLAGS) \$(CFLAGS) \$(LDFLAGS)\" RELOC_SRCDIR=\"\$(RELOCATABLE_SRC_DIR)\" RELOC_BUILDDIR=\"\$(RELOCATABLE_BUILD_DIR)\" RELOC_CONFIG_H_DIR=\"\$(RELOCATABLE_CONFIG_H_DIR)\" RELOC_EXEEXT=\"\$(EXEEXT)\" RELOC_INSTALL_PROG=\"$INSTALL_PROGRAM\""
         case "$ac_aux_dir" in
           /*) INSTALL_PROGRAM="$ac_aux_dir/install-reloc" ;;
           *) INSTALL_PROGRAM="\$(top_builddir)/$ac_aux_dir/install-reloc" ;;

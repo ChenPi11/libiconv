@@ -1,3 +1,27 @@
+2006-07-19  Bruno Haible  <bruno@clisp.org>
+
+	* de.po: Update.
+	* ga.po: Update from Kevin Patrick Scannell <scannell@slu.edu>.
+
+2006-07-03  Bruno Haible  <bruno@clisp.org>
+
+	* eo.po: Update from Edmund Grimley Evans <edmundo@rano.org>.
+
+2006-06-23  Bruno Haible  <bruno@clisp.org>
+
+	* vi.po: Update from Clytie Siddall <clytie@riverland.net.au>.
+
+2006-05-16  Bruno Haible  <bruno@clisp.org>
+
+	* Makefile.in.in: Update from GNU gettext.
+	* Makevars (XGETTEXT_OPTIONS): Add more flags.
+	(USE_MSGCTXT): New variable.
+
+2005-12-29  Bruno Haible  <bruno@clisp.org>
+
+	* zh_TW.po: New file, from Wei-Lun Chao <chaoweilun@pcmail.com.tw>.
+	* LINGUAS: Add zh_TW.
+
 2005-02-11  Bruno Haible  <bruno@clisp.org>
 
 	* rm.po: New file, from Florian Verdet <fvgoto@linuxbourg.ch>.

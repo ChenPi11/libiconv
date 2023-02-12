@@ -1,6 +1,6 @@
 /* Determine a canonical name for the current locale's character encoding.
 
-   Copyright (C) 2000-2005 Free Software Foundation, Inc.
+   Copyright (C) 2000-2006 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify it
    under the terms of the GNU Library General Public License as published
@@ -41,8 +41,7 @@
 #endif
 
 #if defined _WIN32 || defined __WIN32__
-# undef WIN32   /* avoid warning on mingw32 */
-# define WIN32
+# define WIN32_NATIVE
 #endif
 
 #if defined __EMX__
@@ -50,7 +49,7 @@
 # define OS2
 #endif
 
-#if !defined WIN32
+#if !defined WIN32_NATIVE
 # if HAVE_LANGINFO_CODESET
 #  include <langinfo.h>
 # else
@@ -58,7 +57,11 @@
 #   include <locale.h>
 #  endif
 # endif
-#elif defined WIN32
+# ifdef __CYGWIN__
+#  define WIN32_LEAN_AND_MEAN
+#  include <windows.h>
+# endif
+#elif defined WIN32_NATIVE
 # define WIN32_LEAN_AND_MEAN
 # include <windows.h>
 #endif
@@ -107,14 +110,14 @@ static const char * volatile charset_aliases;
 
 /* Return a pointer to the contents of the charset.alias file.  */
 static const char *
-get_charset_aliases ()
+get_charset_aliases (void)
 {
   const char *cp;
 
   cp = charset_aliases;
   if (cp == NULL)
     {
-#if !(defined VMS || defined WIN32)
+#if !(defined VMS || defined WIN32_NATIVE || defined __CYGWIN__)
       FILE *fp;
       const char *dir;
       const char *base = "charset.alias";
@@ -240,7 +243,7 @@ get_charset_aliases ()
 	   "DECKOREAN" "\0" "EUC-KR" "\0";
 # endif
 
-# if defined WIN32
+# if defined WIN32_NATIVE || defined __CYGWIN__
       /* To avoid the troubles of installing a separate file in the same
 	 directory as the DLL and of retrieving the DLL's directory at
 	 runtime, simply inline the aliases here.  */
@@ -287,17 +290,64 @@ get_charset_aliases ()
 STATIC
 #endif
 const char *
-locale_charset ()
+locale_charset (void)
 {
   const char *codeset;
   const char *aliases;
 
-#if !(defined WIN32 || defined OS2)
+#if !(defined WIN32_NATIVE || defined OS2)
 
 # if HAVE_LANGINFO_CODESET
 
   /* Most systems support nl_langinfo (CODESET) nowadays.  */
   codeset = nl_langinfo (CODESET);
+
+#  ifdef __CYGWIN__
+  /* Cygwin 2006 does not have locales.  nl_langinfo (CODESET) always
+     returns "US-ASCII".  As long as this is not fixed, return the suffix
+     of the locale name from the environment variables (if present) or
+     the codepage as a number.  */
+  if (codeset != NULL && strcmp (codeset, "US-ASCII") == 0)
+    {
+      const char *locale;
+      static char buf[2 + 10 + 1];
+
+      locale = getenv ("LC_ALL");
+      if (locale == NULL || locale[0] == '\0')
+	{
+	  locale = getenv ("LC_CTYPE");
+	  if (locale == NULL || locale[0] == '\0')
+	    locale = getenv ("LANG");
+	}
+      if (locale != NULL && locale[0] != '\0')
+	{
+	  /* If the locale name contains an encoding after the dot, return
+	     it.  */
+	  const char *dot = strchr (locale, '.');
+
+	  if (dot != NULL)
+	    {
+	      const char *modifier;
+
+	      dot++;
+	      /* Look for the possible @... trailer and remove it, if any.  */
+	      modifier = strchr (dot, '@');
+	      if (modifier == NULL)
+		return dot;
+	      if (modifier - dot < sizeof (buf))
+		{
+		  memcpy (buf, dot, modifier - dot);
+		  buf [modifier - dot] = '\0';
+		  return buf;
+		}
+	    }
+	}
+
+      /* Woe32 has a function returning the locale's codepage as a number.  */
+      sprintf (buf, "CP%u", GetACP ());
+      codeset = buf;
+    }
+#  endif
 
 # else
 
@@ -329,7 +379,7 @@ locale_charset ()
 
 # endif
 
-#elif defined WIN32
+#elif defined WIN32_NATIVE
 
   static char buf[2 + 10 + 1];
 

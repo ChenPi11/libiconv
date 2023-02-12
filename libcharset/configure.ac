@@ -1,4 +1,4 @@
-dnl Copyright (C) 2000-2003, 2005 Free Software Foundation, Inc.
+dnl Copyright (C) 2000-2003, 2005-2006 Free Software Foundation, Inc.
 dnl This file is part of the GNU CHARSET Library.
 dnl
 dnl The GNU CHARSET Library is free software; you can redistribute it and/or
@@ -19,7 +19,7 @@ dnl Fifth Floor, Boston, MA 02110-1301, USA.
 AC_PREREQ(2.13)
 
 PACKAGE=libcharset
-VERSION=1.3
+VERSION=1.4
 
 AC_INIT(lib/localcharset.c)
 AC_CONFIG_AUX_DIR(build-aux)
@@ -27,11 +27,6 @@ AC_CONFIG_HEADER(config.h)
 AC_PROG_MAKE_SET
 AC_SUBST(PACKAGE)
 AC_SUBST(VERSION)
-
-dnl           installation directories
-
-dnl Prefer modern Filesystem Hierarchy Standard over antiquated GNU standards.
-test "$mandir" != '${prefix}/man' || mandir='${datadir}/man'
 
 dnl           checks for basic programs
 
@@ -65,12 +60,17 @@ dnl           check for build configuration
 
 AC_LIBTOOL_WIN32_DLL
 AC_PROG_LIBTOOL
+gl_VISIBILITY
 
 dnl           checks for header files and functions
 
 AM_LANGINFO_CODESET
-jm_GLIBC21
+gl_GLIBC21
 AC_CHECK_HEADERS(stddef.h stdlib.h string.h)
 AC_CHECK_FUNCS(setlocale)
 
-AC_OUTPUT(Makefile lib/Makefile)
+AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([lib/Makefile])
+AC_CONFIG_FILES([include/localcharset.h:include/localcharset.h.build.in])
+AC_CONFIG_FILES([include/localcharset.h.inst:include/localcharset.h.in])
+AC_OUTPUT

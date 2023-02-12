@@ -1,4 +1,4 @@
-# generated automatically by aclocal 1.9.5 -*- Autoconf -*-
+# generated automatically by aclocal 1.9.6 -*- Autoconf -*-
 
 # Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
 # 2005  Free Software Foundation, Inc.
@@ -28,7 +28,7 @@ AC_DEFUN([AM_AUTOMAKE_VERSION], [am__api_version="1.9"])
 # Call AM_AUTOMAKE_VERSION so it can be traced.
 # This function is AC_REQUIREd by AC_INIT_AUTOMAKE.
 AC_DEFUN([AM_SET_CURRENT_AUTOMAKE_VERSION],
-	 [AM_AUTOMAKE_VERSION([1.9.5])])
+	 [AM_AUTOMAKE_VERSION([1.9.6])])
 
 # AM_AUX_DIR_EXPAND                                         -*- Autoconf -*-
 
@@ -858,14 +858,16 @@ m4_include([m4/eilseq.m4])
 m4_include([m4/endian.m4])
 m4_include([m4/error.m4])
 m4_include([m4/extensions.m4])
+m4_include([m4/full-header-path.m4])
 m4_include([m4/gettext.m4])
 m4_include([m4/iconv.m4])
-m4_include([m4/inttypes.m4])
 m4_include([m4/lib-ld.m4])
 m4_include([m4/lib-link.m4])
 m4_include([m4/lib-prefix.m4])
 m4_include([m4/libtool.m4])
 m4_include([m4/ln.m4])
+m4_include([m4/longdouble.m4])
+m4_include([m4/longlong.m4])
 m4_include([m4/mbstate_t.m4])
 m4_include([m4/nls.m4])
 m4_include([m4/onceonly.m4])
@@ -875,9 +877,13 @@ m4_include([m4/progtest.m4])
 m4_include([m4/readlink.m4])
 m4_include([m4/relocatable.m4])
 m4_include([m4/setenv.m4])
+m4_include([m4/size_max.m4])
 m4_include([m4/ssize_t.m4])
 m4_include([m4/stdbool.m4])
 m4_include([m4/stdint.m4])
 m4_include([m4/strerror.m4])
+m4_include([m4/unistd_h.m4])
 m4_include([m4/unlocked-io.m4])
+m4_include([m4/visibility.m4])
+m4_include([m4/wchar_t.m4])
 m4_include([m4/xreadlink.m4])
